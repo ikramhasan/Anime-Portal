@@ -22,7 +22,6 @@ class JikanApiService {
 
   getAnimeEpisodes(int animeId, {int page = 1}) async {
     var episodes = await _jikan.getAnimeEpisodes(animeId, page: page);
-    print(episodes.toString());
     return episodes;
   }
 
@@ -53,13 +52,21 @@ class JikanApiService {
     return character;
   }
 
-  getCharacterPictures(int characterId) {}
+  getAnimeNews(int animeId) async {
+    var articles = await _jikan.getAnimeNews(animeId);
+    print(articles.toString());
+    return articles;
+  }
 
-  getAnimeNews(int animeId) async {}
-  getAnimeVideos(int animeId) async {}
+  getAnimeVideos(int animeId) async {
+    var s = await _jikan.getAnimeVideos(animeId);
+    print(s);
+  }
+
   getAnimeStats(int animeId) async {}
   getAnimeForum(int animeId, {ForumType type}) async {}
   getAnimeReviews(int animeId, {int page = 1}) async {}
   getAnimeRecommendations(int animeId) async {}
   getAnimeUserUpdates(int animeId, {int page = 1}) async {}
+  getCharacterPictures(int characterId) {}
 }

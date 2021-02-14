@@ -1,5 +1,6 @@
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/anime_page/anime_details.dart';
+import 'package:anime_portal/widgets/anime_news_widget.dart';
 import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
 import 'package:anime_portal/widgets/build_anime_page_description.dart';
 import 'package:anime_portal/widgets/build_anime_picture_widget.dart';
@@ -24,7 +25,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -80,6 +81,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
+  buildPicturePage() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: buildTitleWidget(title: 'Pictures'),
+        ),
+        buildAnimePictureWidget(widget.anime, widget.api),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -87,7 +100,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
         Container(
           height: MediaQuery.of(context).size.height,
           child: DefaultTabController(
-            length: 4,
+            length: 5,
             child: Scaffold(
               appBar: PreferredSize(
                 child: AppBar(
@@ -99,6 +112,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                       Text('Episodes'),
                       Text('Characters'),
                       Text('Pictures'),
+                      Text('News'),
                     ],
                     controller: _tabController,
                     indicatorColor: Colors.blue,
@@ -117,13 +131,14 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                     buildDescriptionPage(),
                     buildEpisodesPage(),
                     buildCharacterPage(),
+                    buildPicturePage(),
                     Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.all(16),
-                          child: buildTitleWidget(title: 'Pictures'),
+                          child: buildTitleWidget(title: 'News'),
                         ),
-                        buildAnimePictureWidget(widget.anime, widget.api),
+                        buildAnimeNewsWidget(widget.anime, widget.api),
                       ],
                     ),
                   ],

@@ -9,25 +9,26 @@ buildCharactersWidget(anime, api) {
         final characterList = snapshot.data.characters;
 
         if (characterList.isEmpty) {
-          return Container(
-            height: 150,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              shrinkWrap: true,
-              itemCount: 5,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Container(
-                  child: Stack(
-                    children: [
-                      Placeholder(),
-                      Center(
-                        child: Text('No Data'),
-                      ),
-                    ],
+          return Expanded(
+            child: Container(
+              child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: 5,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Container(
+                    child: Stack(
+                      children: [
+                        Placeholder(),
+                        Center(
+                          child: Text('No Data'),
+                        ),
+                      ],
+                    ),
+                    height: 150,
+                    width: 100,
                   ),
-                  height: 150,
-                  width: 100,
                 ),
               ),
             ),

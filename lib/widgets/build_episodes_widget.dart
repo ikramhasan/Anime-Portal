@@ -11,7 +11,6 @@ buildEpisodesWidget(anime, api) {
         final episodes = snapshot.data;
         return Expanded(
           child: Container(
-            //height: episodes.length > 1 ? 200 : 20,
             child: episodes.length > 1
                 ? ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
