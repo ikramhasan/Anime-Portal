@@ -146,8 +146,20 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Material(
-                      child: ViewAllPage(api: _api, widgetType: 'trending'),
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(
+                        leading: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            LineIcons.arrowLeft,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        title: Text('Trending Now'),
+                      ),
+                      body: ViewAllPage(api: _api, widgetType: 'trending'),
                     ),
                   ),
                 );
@@ -162,8 +174,20 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Material(
-                      child: ViewAllPage(api: _api, widgetType: 'airing'),
+                    builder: (context) => Scaffold(
+                      appBar: AppBar(
+                        leading: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Icon(
+                            LineIcons.arrowLeft,
+                            color: Colors.blue,
+                          ),
+                        ),
+                        title: Text('Airing Today'),
+                      ),
+                      body: ViewAllPage(api: _api, widgetType: 'airing'),
                     ),
                   ),
                 );
