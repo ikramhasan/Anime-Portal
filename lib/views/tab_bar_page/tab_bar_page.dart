@@ -5,6 +5,7 @@ import 'package:anime_portal/widgets/anime_recommendations_widget.dart';
 import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
 import 'package:anime_portal/widgets/build_anime_page_description.dart';
 import 'package:anime_portal/widgets/build_anime_picture_widget.dart';
+import 'package:anime_portal/widgets/build_anime_review_widget.dart';
 import 'package:anime_portal/widgets/build_episodes_widget.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 6, vsync: this);
+    _tabController = TabController(length: 7, vsync: this);
   }
 
   @override
@@ -106,6 +107,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
+  buildRecommendationsWidget() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: buildTitleWidget(title: 'Recommendations'),
+        ),
+        buildAnimeRecommendationsWidget(widget.anime, widget.api),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -113,7 +126,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
         Container(
           height: MediaQuery.of(context).size.height,
           child: DefaultTabController(
-            length: 6,
+            length: 7,
             child: Scaffold(
               appBar: PreferredSize(
                 child: AppBar(
@@ -127,6 +140,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                       Text('Pictures'),
                       Text('News'),
                       Text('Recommendations'),
+                      Text('Reviews'),
                     ],
                     controller: _tabController,
                     indicatorColor: Colors.blue,
@@ -147,14 +161,14 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                     buildCharacterPage(),
                     buildPicturePage(),
                     buildNewsPage(),
+                    buildRecommendationsWidget(),
                     Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.all(16),
-                          child: buildTitleWidget(title: 'Recommendations'),
+                          child: buildTitleWidget(title: 'Reviews'),
                         ),
-                        buildAnimeRecommendationsWidget(
-                            widget.anime, widget.api),
+                        buildAnimeReviewWidget(widget.anime, widget.api),
                       ],
                     ),
                   ],

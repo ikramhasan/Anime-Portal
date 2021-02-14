@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:jikan_api/jikan_api.dart';
 
 class JikanApiService {
@@ -57,20 +55,25 @@ class JikanApiService {
     return articles;
   }
 
+  // Unused
   getAnimeVideos(int animeId) async {
     var s = await _jikan.getAnimeVideos(animeId);
     print(s);
   }
 
-  getAnimeStats(int animeId) async {}
-  getAnimeForum(int animeId, {ForumType type}) async {}
-  getAnimeReviews(int animeId, {int page = 1}) async {}
-
   getAnimeRecommendations(int animeId) async {
     var recommendations = await _jikan.getAnimeRecommendations(animeId);
-    print(recommendations);
     return recommendations;
   }
+
+  getAnimeReviews(int animeId, {int page = 1}) async {
+    var reviews = await _jikan.getAnimeReviews(animeId);
+    print(reviews.toString());
+    return reviews;
+  }
+
+  getAnimeStats(int animeId) async {}
+  getAnimeForum(int animeId, {ForumType type}) async {}
 
   getAnimeUserUpdates(int animeId, {int page = 1}) async {}
   getCharacterPictures(int characterId) {}
