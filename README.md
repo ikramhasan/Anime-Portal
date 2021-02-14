@@ -9,13 +9,13 @@ A new Flutter project.
  - [x] add currently playing anime widget
  - [x] add anime details screen
  - [x] add rating bar
- - [ ] add Tabbar
+ - [x] add Tabbar
  - [ ] add local storage
  - [ ] add online database
  - [ ] implement watchlist feature
- - [ ] improve homescreen
- - [ ] get character info
- - [ ] add data table for characters
+ - [x] improve homescreen
+ - [x] get character info
+ - [x] add data table for characters
  - [ ] add image downloading feature
  - [ ] add video preview feature
  - [ ] add manga portal ?

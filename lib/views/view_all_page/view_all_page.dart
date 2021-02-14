@@ -53,7 +53,7 @@ class ViewAllPage extends StatelessWidget {
       }
       return Expanded(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+          padding: EdgeInsets.only(top: 16),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 3,

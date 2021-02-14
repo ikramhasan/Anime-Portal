@@ -1,7 +1,10 @@
 import 'package:anime_portal/services/api_service.dart';
+import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
+import 'package:anime_portal/views/airing_today_page/airing_today_page.dart';
 import 'package:anime_portal/views/home_page/widgets/build_airing_this_season_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_airing_today_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_trending_today_widget.dart';
+import 'package:anime_portal/views/trending_now_page/trending_now_page.dart';
 import 'package:anime_portal/views/view_all_page/view_all_page.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:anime_portal/views/search_page/search_page.dart';
@@ -61,22 +64,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        appBar: AppBar(
-                          shadowColor: Colors.blue,
-                          leading: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              LineIcons.arrowLeft,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          title: Text('Trending Now'),
-                        ),
-                        body: ViewAllPage(api: _api, widgetType: 'trending'),
-                      ),
+                      builder: (context) => TrendingNowPage(api: _api),
                     ),
                   );
                 },
@@ -90,22 +78,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        appBar: AppBar(
-                          shadowColor: Colors.blue,
-                          leading: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              LineIcons.arrowLeft,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          title: Text('Airing Today'),
-                        ),
-                        body: ViewAllPage(api: _api, widgetType: 'airing'),
-                      ),
+                      builder: (context) => AiringTodayPage(api: _api),
                     ),
                   );
                 },
@@ -118,22 +91,7 @@ class HomePage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Scaffold(
-                        appBar: AppBar(
-                          shadowColor: Colors.blue,
-                          leading: GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(
-                              LineIcons.arrowLeft,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          title: Text('Airing Today'),
-                        ),
-                        body: ViewAllPage(api: _api, widgetType: 'season'),
-                      ),
+                      builder: (context) => AiringThisSeasonPage(api: _api),
                     ),
                   );
                 },
