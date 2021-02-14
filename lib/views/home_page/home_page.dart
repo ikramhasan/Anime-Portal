@@ -35,21 +35,21 @@ class HomePage extends StatelessWidget {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8),
-            child: InkWell(
-              splashColor: Colors.blue.withOpacity(0.5),
+          InkWell(
+            splashColor: Colors.blue.withOpacity(0.5),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Icon(
                 LineIcons.search,
                 color: Colors.blue,
               ),
-              onTap: () {
-                showSearch(
-                  context: context,
-                  delegate: SearchPage(),
-                );
-              },
             ),
+            onTap: () {
+              showSearch(
+                context: context,
+                delegate: SearchPage(),
+              );
+            },
           ),
         ],
       ),
