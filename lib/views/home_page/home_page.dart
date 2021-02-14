@@ -1,4 +1,5 @@
 import 'package:anime_portal/services/api_service.dart';
+import 'package:anime_portal/views/view_all_page/view_all_page.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:anime_portal/views/search_page/search_page.dart';
 import 'package:anime_portal/widgets/anime_card.dart';
@@ -80,11 +81,7 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(right: 8),
-                  child: Row(
-                    children: [
-                      AnimeCard(anime: schedule[index]),
-                    ],
-                  ),
+                  child: AnimeCard(anime: schedule[index]),
                 );
               },
             ),
@@ -146,7 +143,14 @@ class HomePage extends StatelessWidget {
             buildTitleWidget(
               title: 'Trending Now',
               onPressed: () {
-                // TODO: Implement navigating to anime list page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Material(
+                      child: ViewAllPage(api: _api, widgetType: 'trending'),
+                    ),
+                  ),
+                );
               },
             ),
             SizedBox(height: 8),
@@ -155,7 +159,14 @@ class HomePage extends StatelessWidget {
             buildTitleWidget(
               title: 'Airing today',
               onPressed: () {
-                // TODO: Implement navigating to anime list page
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Material(
+                      child: ViewAllPage(api: _api, widgetType: 'airing'),
+                    ),
+                  ),
+                );
               },
             ),
             buildAiringTodayWidget(weekday),
