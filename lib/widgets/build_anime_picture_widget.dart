@@ -6,25 +6,30 @@ buildAnimePictureWidget(anime, api) {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final pictureList = snapshot.data;
-        return Container(
-          height: 190,
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            itemCount: pictureList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(left: 16),
-                child: Container(
-                  height: 185,
-                  width: 125,
-                  child: Image.network(
-                    pictureList[index].small,
-                    fit: BoxFit.cover,
-                  ),
+        return Expanded(
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 8,
+                  crossAxisSpacing: 8,
+                  childAspectRatio: 1 / 2,
                 ),
-              );
-            },
+                shrinkWrap: true,
+                itemCount: pictureList.length,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Image.network(
+                      pictureList[index].large,
+                      fit: BoxFit.cover,
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
         );
       }

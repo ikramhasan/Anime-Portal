@@ -2,6 +2,7 @@ import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/anime_page/anime_details.dart';
 import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
 import 'package:anime_portal/widgets/build_anime_page_description.dart';
+import 'package:anime_portal/widgets/build_anime_picture_widget.dart';
 import 'package:anime_portal/widgets/build_episodes_widget.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 4, vsync: this);
   }
 
   @override
@@ -67,6 +68,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
+  buildEpisodesPage() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: buildTitleWidget(title: 'Episodes'),
+        ),
+        buildEpisodesWidget(widget.anime, widget.api),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -74,7 +87,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
         Container(
           height: MediaQuery.of(context).size.height,
           child: DefaultTabController(
-            length: 3,
+            length: 4,
             child: Scaffold(
               appBar: PreferredSize(
                 child: AppBar(
@@ -85,6 +98,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                       Text('Description'),
                       Text('Episodes'),
                       Text('Characters'),
+                      Text('Pictures'),
                     ],
                     controller: _tabController,
                     indicatorColor: Colors.blue,
@@ -101,16 +115,17 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                 child: TabBarView(
                   children: [
                     buildDescriptionPage(),
+                    buildEpisodesPage(),
+                    buildCharacterPage(),
                     Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.all(16),
-                          child: buildTitleWidget(title: 'Episodes'),
+                          child: buildTitleWidget(title: 'Pictures'),
                         ),
-                        buildEpisodesWidget(widget.anime, widget.api),
+                        buildAnimePictureWidget(widget.anime, widget.api),
                       ],
                     ),
-                    buildCharacterPage(),
                   ],
                   controller: _tabController,
                 ),
