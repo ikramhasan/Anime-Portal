@@ -2,6 +2,7 @@ import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/anime_page/anime_details.dart';
 import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
 import 'package:anime_portal/widgets/build_anime_page_description.dart';
+import 'package:anime_portal/widgets/build_episodes_widget.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -54,6 +55,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
+  buildCharacterPage() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: buildTitleWidget(title: 'Characters'),
+        ),
+        buildCharactersWidget(widget.anime, widget.api),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -70,8 +83,8 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                   bottom: TabBar(
                     tabs: [
                       Text('Description'),
+                      Text('Episodes'),
                       Text('Characters'),
-                      Text('Test 3'),
                     ],
                     controller: _tabController,
                     indicatorColor: Colors.blue,
@@ -92,16 +105,12 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                       children: [
                         Padding(
                           padding: EdgeInsets.all(16),
-                          child: buildTitleWidget(title: 'Characters'),
+                          child: buildTitleWidget(title: 'Episodes'),
                         ),
-                        buildCharactersWidget(widget.anime, widget.api),
+                        buildEpisodesWidget(widget.anime, widget.api),
                       ],
                     ),
-                    Container(
-                      child: Center(
-                        child: Text('More 3'),
-                      ),
-                    ),
+                    buildCharacterPage(),
                   ],
                   controller: _tabController,
                 ),

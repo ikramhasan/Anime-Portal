@@ -26,11 +26,6 @@ class AnimePage extends StatelessWidget {
                   TabBarPage(anime: anime, api: _api),
                   // Padding(
                   //   padding: EdgeInsets.all(16),
-                  //   child: buildTitleWidget(title: 'Episodes'),
-                  // ),
-                  // buildEpisodesWidget(anime, _api),
-                  // Padding(
-                  //   padding: EdgeInsets.all(16),
                   //   child: buildTitleWidget(title: 'Pictures'),
                   // ),
                   // buildAnimePictureWidget(anime, _api),

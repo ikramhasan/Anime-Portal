@@ -22,6 +22,7 @@ class JikanApiService {
 
   getAnimeEpisodes(int animeId, {int page = 1}) async {
     var episodes = await _jikan.getAnimeEpisodes(animeId, page: page);
+    print(episodes.toString());
     return episodes;
   }
 
@@ -32,7 +33,7 @@ class JikanApiService {
 
   // Does not work
   Future<String> getAnimeMoreInfo(int animeId) async {
-    String info = await _jikan.getAnimeMoreInfo(animeId);
+    var info = await _jikan.getAnimeMoreInfo(animeId);
     return info;
   }
 
@@ -48,7 +49,7 @@ class JikanApiService {
 
   Future<Character> getCharacterInfo(int characterId) async {
     var character = await _jikan.getCharacterInfo(characterId);
-    print(character);
+    //print(character);
     return character;
   }
 
