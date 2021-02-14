@@ -16,8 +16,8 @@ class JikanApiService {
   }
 
   Future<CharacterStaff> getAnimeCharactersStaff(int animeId) async {
-    var charecterStaff = await _jikan.getAnimeCharactersStaff(animeId);
-    return charecterStaff;
+    var characterStaff = await _jikan.getAnimeCharactersStaff(animeId);
+    return characterStaff;
   }
 
   getAnimeEpisodes(int animeId, {int page = 1}) async {
@@ -38,7 +38,6 @@ class JikanApiService {
 
   Future<Schedule> getSchedule({WeekDay weekday}) async {
     Schedule schedule = await _jikan.getSchedule(weekday: weekday);
-    print(schedule.toString());
     return schedule;
   }
 
@@ -48,9 +47,9 @@ class JikanApiService {
   }
 
   Future<Character> getCharacterInfo(int characterId) async {
-    var charId = await _jikan.getCharacterInfo(characterId);
-    print(charId);
-    return charId;
+    var character = await _jikan.getCharacterInfo(characterId);
+    print(character);
+    return character;
   }
 
   getCharacterPictures(int characterId) {}

@@ -1,0 +1,115 @@
+import 'package:anime_portal/services/api_service.dart';
+import 'package:anime_portal/views/anime_page/anime_details.dart';
+import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
+import 'package:anime_portal/widgets/build_anime_page_description.dart';
+import 'package:anime_portal/widgets/title_widget.dart';
+import 'package:flutter/material.dart';
+
+class TabBarPage extends StatefulWidget {
+  final anime;
+  final JikanApiService api;
+
+  const TabBarPage({Key key, @required this.anime, @required this.api})
+      : super(key: key);
+
+  @override
+  _TabBarPageState createState() => _TabBarPageState();
+}
+
+class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
+  TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  buildDescriptionPage() {
+    return Padding(
+      padding: EdgeInsets.only(top: 8),
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: buildTitleWidget(title: 'Description'),
+          ),
+          buildAnimePageDescription(widget.anime),
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: buildTitleWidget(title: 'More Info'),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: AnimeDetails(anime: widget.anime),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height,
+          child: DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: PreferredSize(
+                child: AppBar(
+                  leading: Container(),
+                  shadowColor: Colors.blue,
+                  bottom: TabBar(
+                    tabs: [
+                      Text('Description'),
+                      Text('Characters'),
+                      Text('Test 3'),
+                    ],
+                    controller: _tabController,
+                    indicatorColor: Colors.blue,
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorWeight: 3,
+                    unselectedLabelColor: Colors.grey,
+                    labelColor: Colors.white,
+                    isScrollable: true,
+                  ),
+                ),
+                preferredSize: Size.fromHeight(20),
+              ),
+              body: Container(
+                child: TabBarView(
+                  children: [
+                    buildDescriptionPage(),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(16),
+                          child: buildTitleWidget(title: 'Characters'),
+                        ),
+                        buildCharactersWidget(widget.anime, widget.api),
+                      ],
+                    ),
+                    Container(
+                      child: Center(
+                        child: Text('More 3'),
+                      ),
+                    ),
+                  ],
+                  controller: _tabController,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}

@@ -4,7 +4,6 @@ import 'package:anime_portal/views/search_page/search_page.dart';
 import 'package:anime_portal/widgets/anime_card.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:jikan_api/jikan_api.dart';
 
 class HomePage extends StatelessWidget {
   final JikanApiService _api = JikanApiService();

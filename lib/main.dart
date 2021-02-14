@@ -1,4 +1,5 @@
 import 'package:anime_portal/views/home_page/home_page.dart';
+import 'package:anime_portal/views/test_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         canvasColor: Color(0xFF171721),
+        primaryColor: Color(0xFF171721),
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
