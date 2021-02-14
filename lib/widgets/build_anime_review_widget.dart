@@ -20,18 +20,23 @@ buildAnimeReviewWidget(anime, api) {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
+                      color: Colors.greenAccent,
                     ),
                   ),
-                  title: Text(reviewer.username),
+                  title: Text(
+                    reviewer.username,
+                    style: TextStyle(fontSize: 16),
+                  ),
                   subtitle: ReadMoreText(
                     reviews[index].content,
+                    style: TextStyle(fontSize: 14),
                     trimLines: 3,
                     colorClickableText: Colors.blue,
                     trimMode: TrimMode.Length,
                     trimCollapsedText: 'Show more',
                     trimExpandedText: 'Show less',
                     moreStyle: TextStyle(
-                      fontSize: 14,
+                      fontSize: 12,
                       color: Colors.blue,
                     ),
                   ),

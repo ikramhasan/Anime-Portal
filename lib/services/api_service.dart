@@ -28,7 +28,7 @@ class JikanApiService {
     return pictures;
   }
 
-  // Does not work
+  // TODO: Implement feature
   Future<String> getAnimeMoreInfo(int animeId) async {
     var info = await _jikan.getAnimeMoreInfo(animeId);
     return info;
@@ -44,6 +44,7 @@ class JikanApiService {
     return searchList;
   }
 
+  // TODO: Implement feature
   Future<Character> getCharacterInfo(int characterId) async {
     var character = await _jikan.getCharacterInfo(characterId);
     //print(character);
@@ -55,7 +56,7 @@ class JikanApiService {
     return articles;
   }
 
-  // Unused
+  // TODO: Implement feature
   getAnimeVideos(int animeId) async {
     var s = await _jikan.getAnimeVideos(animeId);
     print(s);
@@ -68,13 +69,20 @@ class JikanApiService {
 
   getAnimeReviews(int animeId, {int page = 1}) async {
     var reviews = await _jikan.getAnimeReviews(animeId);
-    print(reviews.toString());
     return reviews;
   }
 
-  getAnimeStats(int animeId) async {}
+  getAnimeStats(int animeId) async {
+    Stats stats = await _jikan.getAnimeStats(animeId);
+    return stats;
+  }
+
+  // TODO: Implement feature
   getAnimeForum(int animeId, {ForumType type}) async {}
 
+  // TODO: Implement feature
   getAnimeUserUpdates(int animeId, {int page = 1}) async {}
+
+  // TODO: Implement feature
   getCharacterPictures(int characterId) {}
 }

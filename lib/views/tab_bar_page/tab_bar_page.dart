@@ -1,11 +1,12 @@
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/anime_page/anime_details.dart';
 import 'package:anime_portal/widgets/anime_news_widget.dart';
-import 'package:anime_portal/widgets/anime_recommendations_widget.dart';
+import 'package:anime_portal/widgets/build_anime_recommendations_widget.dart';
 import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
 import 'package:anime_portal/widgets/build_anime_page_description.dart';
 import 'package:anime_portal/widgets/build_anime_picture_widget.dart';
 import 'package:anime_portal/widgets/build_anime_review_widget.dart';
+import 'package:anime_portal/widgets/build_anime_stats_widget.dart';
 import 'package:anime_portal/widgets/build_episodes_widget.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 7, vsync: this);
+    _tabController = TabController(length: 8, vsync: this);
   }
 
   @override
@@ -36,7 +37,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  buildDescriptionPage() {
+  buildDescriptionColumn() {
     return Padding(
       padding: EdgeInsets.only(top: 8),
       child: Column(
@@ -59,7 +60,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
-  buildCharacterPage() {
+  buildCharacterColumn() {
     return Column(
       children: [
         Padding(
@@ -71,7 +72,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
-  buildEpisodesPage() {
+  buildEpisodesColumn() {
     return Column(
       children: [
         Padding(
@@ -83,7 +84,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
-  buildPicturePage() {
+  buildPictureColumn() {
     return Column(
       children: [
         Padding(
@@ -95,7 +96,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
-  buildNewsPage() {
+  buildNewsColumn() {
     return Column(
       children: [
         Padding(
@@ -107,7 +108,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
-  buildRecommendationsWidget() {
+  buildRecommendationsColumn() {
     return Column(
       children: [
         Padding(
@@ -119,6 +120,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
     );
   }
 
+  buildReviewColumn() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: buildTitleWidget(title: 'Reviews'),
+        ),
+        buildAnimeReviewWidget(widget.anime, widget.api),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -126,7 +139,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
         Container(
           height: MediaQuery.of(context).size.height,
           child: DefaultTabController(
-            length: 7,
+            length: 8,
             child: Scaffold(
               appBar: PreferredSize(
                 child: AppBar(
@@ -141,6 +154,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                       Text('News'),
                       Text('Recommendations'),
                       Text('Reviews'),
+                      Text('Stats'),
                     ],
                     controller: _tabController,
                     indicatorColor: Colors.blue,
@@ -156,19 +170,20 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
               body: Container(
                 child: TabBarView(
                   children: [
-                    buildDescriptionPage(),
-                    buildEpisodesPage(),
-                    buildCharacterPage(),
-                    buildPicturePage(),
-                    buildNewsPage(),
-                    buildRecommendationsWidget(),
+                    buildDescriptionColumn(),
+                    buildEpisodesColumn(),
+                    buildCharacterColumn(),
+                    buildPictureColumn(),
+                    buildNewsColumn(),
+                    buildRecommendationsColumn(),
+                    buildReviewColumn(),
                     Column(
                       children: [
                         Padding(
                           padding: EdgeInsets.all(16),
-                          child: buildTitleWidget(title: 'Reviews'),
+                          child: buildTitleWidget(title: 'Statistics'),
                         ),
-                        buildAnimeReviewWidget(widget.anime, widget.api),
+                        buildAnimeStatsWidget(widget.anime, widget.api),
                       ],
                     ),
                   ],

@@ -22,6 +22,7 @@ dependencies:
   intl: ^0.16.1
   readmore: ^1.0.0
   webview_flutter: ^1.0.7
+  syncfusion_flutter_charts: ^18.4.42
 
 dev_dependencies:
   flutter_test:
