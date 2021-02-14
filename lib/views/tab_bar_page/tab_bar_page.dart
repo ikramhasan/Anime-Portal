@@ -68,6 +68,14 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
           padding: EdgeInsets.all(16),
           child: buildTitleWidget(title: 'Characters'),
         ),
+        Text(
+          'Tap on a character to view more information',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey,
+          ),
+        ),
+        SizedBox(height: 8),
         buildCharactersWidget(widget.anime, widget.api),
       ],
     );
@@ -120,12 +128,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
           padding: EdgeInsets.all(16),
           child: buildTitleWidget(title: 'Recommendations'),
         ),
+        Text(
+          'Tap on an anime to view more',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.grey,
+          ),
+        ),
         ViewAllPage(
           api: widget.api,
           widgetType: 'recommendation',
           anime: widget.anime,
         ),
-        //buildAnimeRecommendationsWidget(widget.anime, widget.api),
       ],
     );
   }
@@ -172,11 +186,11 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                       Text('Description'),
                       Text('Episodes'),
                       Text('Characters'),
-                      Text('Pictures'),
-                      Text('News'),
                       Text('Recommendations'),
-                      Text('Reviews'),
+                      Text('Pictures'),
                       Text('Stats'),
+                      Text('Reviews'),
+                      Text('News'),
                     ],
                     controller: _tabController,
                     indicatorColor: Colors.blue,
@@ -187,7 +201,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                     isScrollable: true,
                   ),
                 ),
-                preferredSize: Size.fromHeight(20),
+                preferredSize: Size.fromHeight(40),
               ),
               body: Container(
                 child: TabBarView(
@@ -195,11 +209,11 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                     buildDescriptionColumn(),
                     buildEpisodesColumn(),
                     buildCharacterColumn(),
-                    buildPictureColumn(),
-                    buildNewsColumn(),
                     buildRecommendationsColumn(),
-                    buildReviewColumn(),
+                    buildPictureColumn(),
                     buildAnimeStatsColumn(),
+                    buildReviewColumn(),
+                    buildNewsColumn(),
                   ],
                   controller: _tabController,
                 ),

@@ -8,6 +8,19 @@ buildAnimeRecommendationsWidget(anime, api) {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final recommendations = snapshot.data;
+
+        if (recommendations.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: 200,
+              child: Center(
+                child: Text('No Data'),
+              ),
+            ),
+          );
+        }
+
         return Expanded(
           child: Container(
             padding: const EdgeInsets.only(left: 16),
@@ -23,11 +36,12 @@ buildAnimeRecommendationsWidget(anime, api) {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                AnimePage(malId: recommendations[index].malId),
-                          ));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              AnimePage(malId: recommendations[index].malId),
+                        ),
+                      );
                     },
                     child: Container(
                       height: 200,

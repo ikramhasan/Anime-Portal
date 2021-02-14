@@ -7,6 +7,19 @@ buildAnimeReviewWidget(anime, api) {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final reviews = snapshot.data;
+
+        if (reviews.isEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: 200,
+              child: Center(
+                child: Text('No Data'),
+              ),
+            ),
+          );
+        }
+
         return Expanded(
           child: ListView.builder(
             itemCount: reviews.length,

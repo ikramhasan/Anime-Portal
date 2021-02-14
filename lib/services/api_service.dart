@@ -50,7 +50,6 @@ class JikanApiService {
 
   getCharacterPictures(int characterId) async {
     var pictureList = await _jikan.getCharacterPictures(characterId);
-    print(pictureList);
     return pictureList;
   }
 
@@ -67,6 +66,11 @@ class JikanApiService {
   getAnimeStats(int animeId) async {
     Stats stats = await _jikan.getAnimeStats(animeId);
     return stats;
+  }
+
+  Future<Season> getSeason({int year, SeasonType season}) async {
+    var season = await _jikan.getSeason();
+    return season;
   }
 
   // TODO: Implement feature
@@ -88,10 +92,6 @@ class JikanApiService {
     return info;
   }
 
-  Future<Season> getSeason({int year, SeasonType season}) async {
-    var season = await _jikan.getSeason();
-    return season;
-  }
 
   // TODO: Implement feature
   Future<Season> getSeasonLater() async {}

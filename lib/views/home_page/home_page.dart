@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 16, top: 34),
+          padding: EdgeInsets.only(left: 16, top: 34, bottom: 34),
           child: Column(
             children: [
               SizedBox(height: 16),
