@@ -7,7 +7,8 @@ buildAnimePictureWidget({
   @required bool isCharacter,
 }) {
   return FutureBuilder(
-    future: isCharacter ? api.getCharacterPictures(id) : api.getAnimePictures(id),
+    future:
+        isCharacter ? api.getCharacterPictures(id) : api.getAnimePictures(id),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final pictureList = snapshot.data;
@@ -27,9 +28,12 @@ buildAnimePictureWidget({
                 itemBuilder: (context, index) {
                   return Container(
                     width: MediaQuery.of(context).size.width / 2,
-                    child: Image.network(
-                      pictureList[index].large,
-                      fit: BoxFit.cover,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(3),
+                      child: Image.network(
+                        pictureList[index].large,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   );
                 },
