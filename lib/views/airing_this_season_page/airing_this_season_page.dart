@@ -12,7 +12,6 @@ class AiringThisSeasonPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shadowColor: Colors.blue,
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);

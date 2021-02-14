@@ -22,46 +22,44 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       key: _scaffoldKey,
+      appBar: AppBar(
+        title: Text('Anime Portal'),
+        leading: InkWell(
+          onTap: () {
+            _scaffoldKey.currentState.openDrawer();
+          },
+          splashColor: Colors.blue.withOpacity(0.5),
+          child: Icon(
+            LineIcons.stream,
+            color: Colors.blue,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: InkWell(
+              splashColor: Colors.blue.withOpacity(0.5),
+              child: Icon(
+                LineIcons.search,
+                color: Colors.blue,
+              ),
+              onTap: () {
+                showSearch(
+                  context: context,
+                  delegate: SearchPage(),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
       drawer: HomePageDrawer(api: _api),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(left: 16, top: 34, bottom: 34),
+          padding: EdgeInsets.only(left: 16, top: 16, bottom: 34),
           child: Column(
             children: [
-              SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      _scaffoldKey.currentState.openDrawer();
-                    },
-                    splashColor: Colors.blue.withOpacity(0.5),
-                    child: Icon(
-                      LineIcons.stream,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: InkWell(
-                      splashColor: Colors.blue.withOpacity(0.5),
-                      child: Icon(
-                        LineIcons.search,
-                        color: Colors.blue,
-                      ),
-                      onTap: () {
-                        showSearch(
-                          context: context,
-                          delegate: SearchPage(),
-                        );
-                      },
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 8),
               buildTitleWidget(
                 title: 'Trending Now',
                 onPressed: () {

@@ -21,7 +21,7 @@ class SearchPage extends SearchDelegate {
     return [
       IconButton(
         icon: Icon(
-          LineIcons.times,
+          LineIcons.undo,
           color: Colors.blue,
         ),
         onPressed: () {

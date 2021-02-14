@@ -6,12 +6,11 @@ import 'package:line_icons/line_icons.dart';
 class TrendingNowPage extends StatelessWidget {
   final JikanApiService api;
 
-  const TrendingNowPage({Key key,@required this.api}) : super(key: key);
+  const TrendingNowPage({Key key, @required this.api}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shadowColor: Colors.blue,
         leading: GestureDetector(
           onTap: () {
             Navigator.pop(context);
