@@ -58,19 +58,43 @@ buildCharactersWidget(anime, api) {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 125,
-                            width: 90,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(3),
-                              child: CachedNetworkImage(
-                                imageUrl: characterList[index].imageUrl,
-                                placeholder: (context, url) => Center(
-                                  child: CircularProgressIndicator(),
+                          Stack(
+                            children: [
+                              Container(
+                                height: 125,
+                                width: 90,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(3),
+                                  child: CachedNetworkImage(
+                                    imageUrl: characterList[index].imageUrl,
+                                    placeholder: (context, url) => Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                fit: BoxFit.cover,
                               ),
-                            ),
+                              Positioned(
+                                bottom: 5,
+                                right: 5,
+                                child: Container(
+                                  height: 12,
+                                  decoration: BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius: BorderRadius.circular(3),
+                                  ),
+                                  child: characterList[index].role != null
+                                      ? Text(
+                                          ' ${characterList[index].role} ',
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      : Container(),
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 5),
                           Text(
@@ -98,3 +122,50 @@ buildCharactersWidget(anime, api) {
     },
   );
 }
+
+
+// SingleChildScrollView(
+//               child: Column(
+//                 children: [
+//                   ...characterList.map((character) {
+//                     return Container(
+//                       height: 150,
+//                       child: Padding(
+//                         padding: EdgeInsets.all(8),
+//                         child: Row(
+//                           crossAxisAlignment: CrossAxisAlignment.start,
+//                           children: [
+//                             Container(
+//                               height: 125,
+//                               width: 90,
+//                               child: ClipRRect(
+//                                 borderRadius: BorderRadius.circular(3),
+//                                 child: CachedNetworkImage(
+//                                   imageUrl: character.imageUrl,
+//                                   placeholder: (context, url) => Center(
+//                                     child: CircularProgressIndicator(),
+//                                   ),
+//                                   fit: BoxFit.cover,
+//                                 ),
+//                               ),
+//                             ),
+//                             Column(
+//                               children: [
+//                                 Text(
+//                                   character.name.replaceFirst(RegExp(','), ''),
+//                                   style: TextStyle(fontSize: 12),
+//                                 ),
+//                                 Text(
+//                                   character.role,
+//                                   style: TextStyle(fontSize: 12),
+//                                 ),
+//                               ],
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     );
+//                   }).toList(),
+//                 ],
+//               ),
+//             ),
