@@ -1,3 +1,4 @@
+import 'package:anime_portal/views/character_details_page/character_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -47,64 +48,76 @@ buildCharactersWidget(anime, api) {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: Container(
-                    height: 200,
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                height: 125,
-                                width: 90,
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(3),
-                                  child: CachedNetworkImage(
-                                    imageUrl: characterList[index].imageUrl,
-                                    placeholder: (context, url) => Center(
-                                      child: CircularProgressIndicator(),
-                                    ),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                bottom: 5,
-                                right: 5,
-                                child: Container(
-                                  height: 12,
-                                  decoration: BoxDecoration(
-                                    color: Colors.blue,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CharacterDetailsPage(
+                            characterId: characterList[index].malId,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      height: 200,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Stack(
+                              children: [
+                                Container(
+                                  height: 125,
+                                  width: 90,
+                                  child: ClipRRect(
                                     borderRadius: BorderRadius.circular(3),
+                                    child: CachedNetworkImage(
+                                      imageUrl: characterList[index].imageUrl,
+                                      placeholder: (context, url) => Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                  child: characterList[index].role != null
-                                      ? Text(
-                                          ' ${characterList[index].role} ',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      : Container(),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(height: 5),
-                          Text(
-                            characterList[index]
-                                .name
-                                .replaceFirst(RegExp(', '), '\n'),
-                            style: TextStyle(fontSize: 12),
-                          ),
-                        ],
+                                Positioned(
+                                  bottom: 5,
+                                  right: 5,
+                                  child: Container(
+                                    height: 12,
+                                    decoration: BoxDecoration(
+                                      color: Colors.blue,
+                                      borderRadius: BorderRadius.circular(3),
+                                    ),
+                                    child: characterList[index].role != null
+                                        ? Text(
+                                            ' ${characterList[index].role} ',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : Container(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              characterList[index]
+                                  .name
+                                  .replaceFirst(RegExp(', '), '\n'),
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

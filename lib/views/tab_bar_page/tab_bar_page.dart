@@ -91,7 +91,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
           padding: EdgeInsets.all(16),
           child: buildTitleWidget(title: 'Pictures'),
         ),
-        buildAnimePictureWidget(widget.anime, widget.api),
+        buildAnimePictureWidget(id: widget.anime.malId,api: widget.api, isCharacter: false,),
       ],
     );
   }
@@ -128,6 +128,18 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
           child: buildTitleWidget(title: 'Reviews'),
         ),
         buildAnimeReviewWidget(widget.anime, widget.api),
+      ],
+    );
+  }
+
+  buildAnimeStatsColumn() {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.all(16),
+          child: buildTitleWidget(title: 'Statistics'),
+        ),
+        buildAnimeStatsWidget(widget.anime, widget.api),
       ],
     );
   }
@@ -177,15 +189,7 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
                     buildNewsColumn(),
                     buildRecommendationsColumn(),
                     buildReviewColumn(),
-                    Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(16),
-                          child: buildTitleWidget(title: 'Statistics'),
-                        ),
-                        buildAnimeStatsWidget(widget.anime, widget.api),
-                      ],
-                    ),
+                    buildAnimeStatsColumn(),
                   ],
                   controller: _tabController,
                 ),

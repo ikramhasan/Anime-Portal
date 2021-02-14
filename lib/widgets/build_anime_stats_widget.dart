@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:jikan_api/jikan_api.dart';
 
 buildAnimeStatsWidget(anime, api) {
-  api.getAnimeStats(anime.malId);
   return FutureBuilder(
     future: api.getAnimeStats(anime.malId),
     builder: (context, snapshot) {

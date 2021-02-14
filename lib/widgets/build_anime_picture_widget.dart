@@ -1,8 +1,13 @@
+import 'package:anime_portal/services/api_service.dart';
 import 'package:flutter/material.dart';
 
-buildAnimePictureWidget(anime, api) {
+buildAnimePictureWidget({
+  @required int id,
+  @required JikanApiService api,
+  @required bool isCharacter,
+}) {
   return FutureBuilder(
-    future: api.getAnimePictures(anime.malId),
+    future: isCharacter ? api.getCharacterPictures(id) : api.getAnimePictures(id),
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final pictureList = snapshot.data;

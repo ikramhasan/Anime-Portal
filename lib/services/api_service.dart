@@ -28,9 +28,10 @@ class JikanApiService {
     return pictures;
   }
 
-  // TODO: Implement feature
+  // Does not work
   Future<String> getAnimeMoreInfo(int animeId) async {
     var info = await _jikan.getAnimeMoreInfo(animeId);
+    print(info.toString());
     return info;
   }
 
@@ -44,10 +45,8 @@ class JikanApiService {
     return searchList;
   }
 
-  // TODO: Implement feature
   Future<Character> getCharacterInfo(int characterId) async {
-    var character = await _jikan.getCharacterInfo(characterId);
-    //print(character);
+    Character character = await _jikan.getCharacterInfo(characterId);
     return character;
   }
 
@@ -84,5 +83,9 @@ class JikanApiService {
   getAnimeUserUpdates(int animeId, {int page = 1}) async {}
 
   // TODO: Implement feature
-  getCharacterPictures(int characterId) {}
+  getCharacterPictures(int characterId) async {
+    var pictureList = await _jikan.getCharacterPictures(characterId);
+    print(pictureList);
+    return pictureList;
+  }
 }
