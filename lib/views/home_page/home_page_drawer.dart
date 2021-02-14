@@ -21,12 +21,36 @@ class HomePageDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
-                    children: [
-                      Icon(LineIcons.userSecret, size: 25),
-                      SizedBox(width: 8),
-                      Text('anonymous'),
-                    ],
+                  InkWell(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            backgroundColor: Theme.of(context).canvasColor,
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('Cancel'),
+                              ),
+                            ],
+                            title: Text('Alert !'),
+                            content: Text(
+                              'Login feature not yet implemented. Please wait.',
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Row(
+                      children: [
+                        Icon(LineIcons.userSecret, size: 25),
+                        SizedBox(width: 8),
+                        Text('anonymous'),
+                      ],
+                    ),
                   ),
                   Icon(LineIcons.alternateSignIn, size: 25),
                 ],
