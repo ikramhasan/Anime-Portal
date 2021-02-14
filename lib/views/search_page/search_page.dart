@@ -5,6 +5,17 @@ import 'package:jikan_api/jikan_api.dart';
 import 'package:line_icons/line_icons.dart';
 
 class SearchPage extends SearchDelegate {
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return super.appBarTheme(context).copyWith(
+          appBarTheme: AppBarTheme(
+            color: Theme.of(context).canvasColor,
+            shadowColor: Colors.blue,
+          ),
+          textTheme: TextTheme(),
+        );
+  }
+
   final animeRecommendations = [
     'Attack on Titan',
     'Death Note',
@@ -41,8 +52,7 @@ class SearchPage extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    // throw UnimplementedError();
+    return Container();
   }
 
   @override
@@ -52,7 +62,8 @@ class SearchPage extends SearchDelegate {
     return FutureBuilder(
       future: _api.search(query, SearchType.anime),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            query.isNotEmpty) {
           return AnimeListPage(animeList: snapshot.data);
         }
         return ListTile(
