@@ -63,6 +63,7 @@ class JikanApiService {
 
   getAnimeRecommendations(int animeId) async {
     var recommendations = await _jikan.getAnimeRecommendations(animeId);
+    Recommendation r;
     return recommendations;
   }
 

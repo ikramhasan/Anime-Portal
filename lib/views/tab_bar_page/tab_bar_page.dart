@@ -1,5 +1,6 @@
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/anime_page/anime_details.dart';
+import 'package:anime_portal/views/view_all_page/view_all_page.dart';
 import 'package:anime_portal/widgets/anime_news_widget.dart';
 import 'package:anime_portal/widgets/build_anime_recommendations_widget.dart';
 import 'package:anime_portal/widgets/build_anime_characters_widget.dart';
@@ -91,7 +92,11 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
           padding: EdgeInsets.all(16),
           child: buildTitleWidget(title: 'Pictures'),
         ),
-        buildAnimePictureWidget(id: widget.anime.malId,api: widget.api, isCharacter: false,),
+        buildAnimePictureWidget(
+          id: widget.anime.malId,
+          api: widget.api,
+          isCharacter: false,
+        ),
       ],
     );
   }
@@ -115,7 +120,12 @@ class _TabBarPageState extends State<TabBarPage> with TickerProviderStateMixin {
           padding: EdgeInsets.all(16),
           child: buildTitleWidget(title: 'Recommendations'),
         ),
-        buildAnimeRecommendationsWidget(widget.anime, widget.api),
+        ViewAllPage(
+          api: widget.api,
+          widgetType: 'recommendation',
+          anime: widget.anime,
+        ),
+        //buildAnimeRecommendationsWidget(widget.anime, widget.api),
       ],
     );
   }
