@@ -1,6 +1,7 @@
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
 import 'package:anime_portal/views/airing_today_page/airing_today_page.dart';
+import 'package:anime_portal/views/home_page/home_page_drawer.dart';
 import 'package:anime_portal/views/home_page/widgets/build_airing_this_season_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_airing_today_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_trending_today_widget.dart';
@@ -13,12 +14,15 @@ import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
   final JikanApiService _api = JikanApiService();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     int weekday = DateTime.now().weekday;
 
     return Scaffold(
+      key: _scaffoldKey,
+      drawer: HomePageDrawer(api: _api),
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: Padding(
@@ -31,7 +35,7 @@ class HomePage extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      // TODO: Implement drawer here
+                      _scaffoldKey.currentState.openDrawer();
                     },
                     splashColor: Colors.blue.withOpacity(0.5),
                     child: Icon(
