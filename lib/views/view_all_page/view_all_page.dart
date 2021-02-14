@@ -60,12 +60,17 @@ class ViewAllPage extends StatelessWidget {
               childAspectRatio: 0.72,
             ),
             shrinkWrap: true,
-            itemCount:
-                widgetType == 'airing' ? schedule.length : snapshot.data.length,
+            itemCount: widgetType == 'airing'
+                ? schedule.length
+                : widgetType == 'season'
+                    ? snapshot.data.anime.length
+                    : snapshot.data.length,
             itemBuilder: (context, index) {
               final anime = widgetType == 'airing'
                   ? schedule[index]
-                  : snapshot.data[index];
+                  : widgetType == 'season'
+                      ? snapshot.data.anime[index]
+                      : snapshot.data[index];
               return Padding(
                 padding: const EdgeInsets.only(bottom: 8),
                 child: GestureDetector(
@@ -157,7 +162,9 @@ class ViewAllPage extends StatelessWidget {
           ? api.getTopAnime()
           : widgetType == 'airing'
               ? api.getSchedule()
-              : api.getAnimeRecommendations(anime.malId),
+              : widgetType == 'season'
+                  ? api.getSeason()
+                  : api.getAnimeRecommendations(anime.malId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return widgetType == 'recommendation'

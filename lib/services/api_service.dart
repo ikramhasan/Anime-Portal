@@ -28,13 +28,6 @@ class JikanApiService {
     return pictures;
   }
 
-  // Does not work
-  Future<String> getAnimeMoreInfo(int animeId) async {
-    var info = await _jikan.getAnimeMoreInfo(animeId);
-    print(info.toString());
-    return info;
-  }
-
   Future<Schedule> getSchedule({WeekDay weekday}) async {
     Schedule schedule = await _jikan.getSchedule(weekday: weekday);
     return schedule;
@@ -55,15 +48,14 @@ class JikanApiService {
     return articles;
   }
 
-  // TODO: Implement feature
-  getAnimeVideos(int animeId) async {
-    var s = await _jikan.getAnimeVideos(animeId);
-    print(s);
+  getCharacterPictures(int characterId) async {
+    var pictureList = await _jikan.getCharacterPictures(characterId);
+    print(pictureList);
+    return pictureList;
   }
 
   getAnimeRecommendations(int animeId) async {
     var recommendations = await _jikan.getAnimeRecommendations(animeId);
-    Recommendation r;
     return recommendations;
   }
 
@@ -78,15 +70,36 @@ class JikanApiService {
   }
 
   // TODO: Implement feature
+  getAnimeVideos(int animeId) async {
+    var s = await _jikan.getAnimeVideos(animeId);
+    print(s);
+  }
+
+  // TODO: Implement feature
   getAnimeForum(int animeId, {ForumType type}) async {}
 
   // TODO: Implement feature
   getAnimeUserUpdates(int animeId, {int page = 1}) async {}
 
+  // Does not work
+  Future<String> getAnimeMoreInfo(int animeId) async {
+    var info = await _jikan.getAnimeMoreInfo(animeId);
+    print(info.toString());
+    return info;
+  }
+
+  Future<Season> getSeason({int year, SeasonType season}) async {
+    var season = await _jikan.getSeason();
+    return season;
+  }
+
   // TODO: Implement feature
-  getCharacterPictures(int characterId) async {
-    var pictureList = await _jikan.getCharacterPictures(characterId);
-    print(pictureList);
-    return pictureList;
+  Future<Season> getSeasonLater() async {}
+
+  // TODO: Implement feature
+  getSeasonArchive() async {
+    var seasonArchiveList = await _jikan.getSeasonArchive();
+    print(seasonArchiveList.toString());
+    return seasonArchiveList;
   }
 }
