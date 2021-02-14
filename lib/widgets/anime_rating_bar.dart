@@ -13,16 +13,18 @@ class AnimeRatingBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SmoothStarRating(
-      allowHalfRating: false,
-      onRated: (v) {},
-      starCount: 5,
-      rating: rating - 5,
-      size: size,
-      isReadOnly: true,
-      color: Color(0xFFFFD700),
-      borderColor: Color(0xFFFFD700),
-      spacing: 0.0,
-    );
+    return rating != null
+        ? SmoothStarRating(
+            allowHalfRating: false,
+            onRated: (v) {},
+            starCount: 5,
+            rating: rating - 5,
+            size: size,
+            isReadOnly: true,
+            color: Color(0xFFFFD700),
+            borderColor: Color(0xFFFFD700),
+            spacing: 0.0,
+          )
+        : Container();
   }
 }

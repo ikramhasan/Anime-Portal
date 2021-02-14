@@ -38,6 +38,7 @@ class JikanApiService {
 
   Future<Schedule> getSchedule({WeekDay weekday}) async {
     Schedule schedule = await _jikan.getSchedule(weekday: weekday);
+    print(schedule.toString());
     return schedule;
   }
 

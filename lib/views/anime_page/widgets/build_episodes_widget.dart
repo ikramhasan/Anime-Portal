@@ -8,32 +8,39 @@ buildEpisodesWidget(anime, api) {
       if (snapshot.connectionState == ConnectionState.done) {
         final episodes = snapshot.data;
         return Container(
-          height: 200,
-          child: ListView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-            itemCount: episodes.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => AnimeVideoPlayer(
-                          url: episodes[index].videoUrl,
+          height: episodes.length > 1 ? 200 : 20,
+          child: episodes.length > 1
+              ? ListView.builder(
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  itemCount: episodes.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AnimeVideoPlayer(
+                                url: episodes[index].videoUrl,
+                              ),
+                            ));
+                      },
+                      child: ListTile(
+                        leading: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(episodes[index].episodeId.toString()),
                         ),
-                      ));
-                },
-                child: ListTile(
-                  leading: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(episodes[index].episodeId.toString()),
+                        title: Text(episodes[index].title),
+                      ),
+                    );
+                  },
+                )
+              : Center(
+                  child: Text(
+                    'No Data',
+                    style: TextStyle(color: Colors.white),
                   ),
-                  title: Text(episodes[index].title),
                 ),
-              );
-            },
-          ),
         );
       }
       return Center(

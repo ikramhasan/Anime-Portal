@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
 
   buildAiringTodayWidget(int weekday) {
     return FutureBuilder(
-      future: _api.getSchedule(weekday: WeekDay.saturday),
+      future: _api.getSchedule(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           var schedule = snapshot.data.unknown;

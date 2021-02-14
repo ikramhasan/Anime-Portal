@@ -7,9 +7,33 @@ buildCharactersWidget(anime, api) {
     builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         final characterList = snapshot.data.characters;
-        api.getCharacterInfo(characterList[0].malId).then((value) {
-          print(value);
-        });
+
+        if (characterList.isEmpty) {
+          return Container(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              shrinkWrap: true,
+              itemCount: 5,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(left: 16),
+                child: Container(
+                  child: Stack(
+                    children: [
+                      Placeholder(),
+                      Center(
+                        child: Text('No Data'),
+                      ),
+                    ],
+                  ),
+                  height: 150,
+                  width: 100,
+                ),
+              ),
+            ),
+          );
+        }
+
         return Container(
           padding: const EdgeInsets.only(left: 16),
           height: 150,
