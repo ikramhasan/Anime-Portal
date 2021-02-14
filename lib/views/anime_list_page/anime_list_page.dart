@@ -25,7 +25,8 @@ class AnimeListPage extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AnimePage(anime: animeList[index]),
+                      builder: (context) =>
+                          AnimePage(malId: animeList[index].malId),
                     ));
               },
               child: Row(

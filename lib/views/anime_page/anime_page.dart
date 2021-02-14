@@ -4,9 +4,9 @@ import 'package:anime_portal/widgets/build_anime_header.dart';
 import 'package:flutter/material.dart';
 
 class AnimePage extends StatelessWidget {
-  final anime;
+  final malId;
 
-  const AnimePage({Key key, @required this.anime}) : super(key: key);
+  const AnimePage({Key key, @required this.malId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final JikanApiService _api = JikanApiService();
@@ -15,7 +15,7 @@ class AnimePage extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
         child: FutureBuilder(
-          future: _api.getAnimeInfo(anime.malId),
+          future: _api.getAnimeInfo(malId),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               final anime = snapshot.data;
@@ -24,7 +24,6 @@ class AnimePage extends StatelessWidget {
                 children: [
                   buildAnimePageHeader(anime, context),
                   TabBarPage(anime: anime, api: _api),
-                
                 ],
               );
             }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 buildAnimeNewsWidget(anime, api) {
-  api.getAnimeVideos(anime.malId);
   return FutureBuilder(
     future: api.getAnimeNews(anime.malId),
     builder: (context, snapshot) {

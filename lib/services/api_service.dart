@@ -54,7 +54,6 @@ class JikanApiService {
 
   getAnimeNews(int animeId) async {
     var articles = await _jikan.getAnimeNews(animeId);
-    print(articles.toString());
     return articles;
   }
 
@@ -66,7 +65,13 @@ class JikanApiService {
   getAnimeStats(int animeId) async {}
   getAnimeForum(int animeId, {ForumType type}) async {}
   getAnimeReviews(int animeId, {int page = 1}) async {}
-  getAnimeRecommendations(int animeId) async {}
+
+  getAnimeRecommendations(int animeId) async {
+    var recommendations = await _jikan.getAnimeRecommendations(animeId);
+    print(recommendations);
+    return recommendations;
+  }
+
   getAnimeUserUpdates(int animeId, {int page = 1}) async {}
   getCharacterPictures(int characterId) {}
 }

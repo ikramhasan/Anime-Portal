@@ -14,7 +14,7 @@ class AnimeCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AnimePage(anime: anime),
+              builder: (context) => AnimePage(malId: anime.malId),
             ));
       },
       child: Column(
