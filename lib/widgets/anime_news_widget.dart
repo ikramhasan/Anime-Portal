@@ -31,7 +31,9 @@ buildAnimeNewsWidget(anime, api) {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: ListTile(
-                    leading: Image.network(articles[index].imageUrl),
+                    leading: articles[index].imageUrl != null
+                        ? Image.network(articles[index].imageUrl)
+                        : Text('No Image'),
                     title: Text(
                       articles[index].title,
                       style: TextStyle(fontSize: 14),

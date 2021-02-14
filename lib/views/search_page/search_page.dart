@@ -16,12 +16,6 @@ class SearchPage extends SearchDelegate {
         );
   }
 
-  final animeRecommendations = [
-    'Attack on Titan',
-    'Death Note',
-    'Dragon Ball',
-    'Detective Conan',
-  ];
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -71,7 +65,9 @@ class SearchPage extends SearchDelegate {
             LineIcons.search,
             color: Colors.blue,
           ),
-          title: Text('Type something in the field...'),
+          title: query.isEmpty
+              ? Text('Type something in the field...')
+              : Text('Searching. Please wait...'),
         );
       },
     );
