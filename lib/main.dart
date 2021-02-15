@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         },
         builder: (_) {
           if (Get.find<AuthController>().user != null) {
-            return HomePage();
+            return RootApp();
           } else {
             return LoginPage();
           }

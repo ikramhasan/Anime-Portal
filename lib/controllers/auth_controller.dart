@@ -16,6 +16,8 @@ class AuthController extends GetxController {
   // Firebase user one-time fetch
   Future<User> get getUser async => _auth.currentUser;
 
+  Stream<User> get userStream => _auth.authStateChanges();
+
   @override
   void onInit() async {
     //run every time auth state changes
