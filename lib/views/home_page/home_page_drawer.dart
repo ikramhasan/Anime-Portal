@@ -1,3 +1,4 @@
+import 'package:anime_portal/controllers/auth_controller.dart';
 import 'package:anime_portal/controllers/user_controller.dart';
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
@@ -14,7 +15,9 @@ class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({Key key, @required this.api}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final userController = Get.find<UserController>();
+    final user = Get.find<UserController>().user;
+    final authController = Get.find<AuthController>();
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -25,19 +28,76 @@ class HomePageDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Get.to(LoginPage());
-                    },
-                    child: Row(
-                      children: [
-                        Icon(LineIcons.userSecret, size: 25),
-                        SizedBox(width: 8),
-                        Text('anonymous'),
-                      ],
-                    ),
-                  ),
-                  Icon(LineIcons.alternateSignIn, size: 25),
+                  user.uid == null
+                      ? InkWell(
+                          onTap: () {
+                            Get.to(LoginPage());
+                          },
+                          child: Row(
+                            children: [
+                              Icon(LineIcons.userSecret, size: 25),
+                              SizedBox(width: 8),
+                              Text('anonymous'),
+                            ],
+                          ),
+                        )
+                      : Text(user.name),
+                  user.uid == null
+                      ? InkWell(
+                          onTap: () {
+                            Get.to(LoginPage());
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 70,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 5),
+                                Text(
+                                  'Login',
+                                  style: TextStyle(color: Colors.blue),
+                                ),
+                                SizedBox(width: 5),
+                                Icon(
+                                  LineIcons.alternateSignIn,
+                                  size: 25,
+                                  color: Colors.blue,
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : InkWell(
+                          onTap: () {
+                            authController.signout();
+                          },
+                          child: Container(
+                            height: 25,
+                            width: 85,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            child: Row(
+                              children: [
+                                SizedBox(width: 5),
+                                Text(
+                                  'Signout',
+                                  style: TextStyle(color: Colors.red),
+                                ),
+                                SizedBox(width: 5),
+                                Icon(
+                                  Icons.exit_to_app,
+                                  color: Colors.red,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                 ],
               ),
               decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'package:anime_portal/controllers/auth_controller.dart';
+import 'package:anime_portal/widgets/build_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,31 +10,6 @@ class SignupPage extends GetWidget<AuthController> {
 
   @override
   Widget build(BuildContext context) {
-    buildTextInputField({
-      @required String hintText,
-      @required TextEditingController textController,
-    }) {
-      return Container(
-        height: 60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(3),
-          color: Colors.blueGrey[900],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            controller: textController,
-            decoration: InputDecoration(
-              hintText: hintText,
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: Colors.blue),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

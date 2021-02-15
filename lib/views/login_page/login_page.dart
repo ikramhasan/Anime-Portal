@@ -1,5 +1,6 @@
 import 'package:anime_portal/controllers/auth_controller.dart';
 import 'package:anime_portal/views/signup_page/signup_page.dart';
+import 'package:anime_portal/widgets/build_text_field_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -64,44 +65,14 @@ class LoginPage extends GetWidget<AuthController> {
               ),
             ),
             SizedBox(height: 64),
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: Colors.blueGrey[900],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ),
+            buildTextInputField(
+              hintText: 'Email',
+              textController: _emailController,
             ),
             SizedBox(height: 32),
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: Colors.blueGrey[900],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ),
+            buildTextInputField(
+              hintText: 'Password',
+              textController: _passwordController,
             ),
             Expanded(
               child: SizedBox(height: 32),
