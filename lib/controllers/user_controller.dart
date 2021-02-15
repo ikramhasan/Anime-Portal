@@ -6,7 +6,9 @@ class UserController extends GetxController {
 
   UserModel get user => _userModel.value;
 
-  set user(UserModel user) => this._userModel.value = user;
+  setUser(UserModel user) {
+    this._userModel.value = user;
+  }
 
   clear() {
     _userModel.value = UserModel();

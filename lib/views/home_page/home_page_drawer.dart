@@ -12,10 +12,12 @@ import 'package:line_icons/line_icons.dart';
 class HomePageDrawer extends StatelessWidget {
   final JikanApiService api;
 
-  const HomePageDrawer({Key key, @required this.api}) : super(key: key);
+  HomePageDrawer({Key key, @required this.api}) : super(key: key);
+
+  final user = Get.find<UserController>().user;
+
   @override
   Widget build(BuildContext context) {
-    final user = Get.find<UserController>().user;
     final authController = Get.find<AuthController>();
 
     return Drawer(
@@ -28,7 +30,7 @@ class HomePageDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  user.uid == null
+                  user.email == null
                       ? InkWell(
                           onTap: () {
                             Get.to(LoginPage());
@@ -42,7 +44,7 @@ class HomePageDrawer extends StatelessWidget {
                           ),
                         )
                       : Text(user.name),
-                  user.uid == null
+                  user.email == null
                       ? InkWell(
                           onTap: () {
                             Get.to(LoginPage());

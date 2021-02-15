@@ -1,3 +1,4 @@
+import 'package:anime_portal/controllers/auth_controller.dart';
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
 import 'package:anime_portal/views/airing_today_page/airing_today_page.dart';
@@ -6,15 +7,16 @@ import 'package:anime_portal/views/home_page/widgets/build_airing_this_season_wi
 import 'package:anime_portal/views/home_page/widgets/build_airing_today_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_trending_today_widget.dart';
 import 'package:anime_portal/views/trending_now_page/trending_now_page.dart';
-import 'package:anime_portal/views/view_all_page/view_all_page.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:anime_portal/views/search_page/search_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomePage extends StatelessWidget {
   final JikanApiService _api = JikanApiService();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {

@@ -20,7 +20,7 @@ class AuthController extends GetxController {
   void onInit() async {
     //run every time auth state changes
     _firebaseUser.value = await getUser;
-    _firebaseUser.bindStream(_auth.authStateChanges().asBroadcastStream());
+    _firebaseUser.bindStream(_auth.authStateChanges());
     super.onInit();
   }
 
@@ -45,7 +45,7 @@ class AuthController extends GetxController {
       if (await _database.createNewUserInDatabase(user)) {
         // User created succesfully
         print('reached');
-        Get.find<UserController>().user = user;
+        Get.find<UserController>().setUser(user);
         print('also reached');
         Get.back();
       }
@@ -62,8 +62,11 @@ class AuthController extends GetxController {
     try {
       UserCredential userCredential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      Get.find<UserController>().user =
-          await _database.getUserFromDatabase(userCredential.user.uid);
+      Get.find<UserController>().setUser(
+        await _database.getUserFromDatabase(userCredential.user.uid),
+      );
+      // Get.find<UserController>().user =
+      //     await _database.getUserFromDatabase(userCredential.user.uid);
       Get.offAll(HomePage());
     } catch (e) {
       Get.snackbar(

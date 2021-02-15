@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'controllers/user_controller.dart';
+import 'views/root_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
+      //home: RootApp(),
       home: GetX(
         initState: (_) async {
           Get.put<UserController>(UserController());
