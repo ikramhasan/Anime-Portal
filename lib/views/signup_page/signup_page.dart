@@ -1,14 +1,39 @@
 import 'package:anime_portal/controllers/auth_controller.dart';
-import 'package:anime_portal/views/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupPage extends GetWidget<AuthController> {
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    buildTextInputField({
+      @required String hintText,
+      @required TextEditingController textController,
+    }) {
+      return Container(
+        height: 60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(3),
+          color: Colors.blueGrey[900],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: TextField(
+            controller: textController,
+            decoration: InputDecoration(
+              hintText: hintText,
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.blue),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -64,44 +89,19 @@ class SignupPage extends GetWidget<AuthController> {
               ),
             ),
             SizedBox(height: 64),
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: Colors.blueGrey[900],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    hintText: 'Email',
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ),
+            buildTextInputField(
+              hintText: 'Name',
+              textController: _nameController,
             ),
             SizedBox(height: 32),
-            Container(
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: Colors.blueGrey[900],
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: _passwordController,
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                    ),
-                  ),
-                ),
-              ),
+            buildTextInputField(
+              hintText: 'Email',
+              textController: _emailController,
+            ),
+            SizedBox(height: 32),
+            buildTextInputField(
+              hintText: 'Email',
+              textController: _passwordController,
             ),
             Expanded(
               child: SizedBox(height: 32),
@@ -111,6 +111,7 @@ class SignupPage extends GetWidget<AuthController> {
               splashColor: Colors.white,
               onTap: () {
                 controller.createUser(
+                  name: _nameController.text.trim(),
                   email: _emailController.text,
                   password: _passwordController.text,
                 );
