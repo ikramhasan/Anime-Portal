@@ -67,8 +67,6 @@ class AuthController extends GetxController {
       Get.find<UserController>().setUser(
         await _database.getUserFromDatabase(userCredential.user.uid),
       );
-      // Get.find<UserController>().user =
-      //     await _database.getUserFromDatabase(userCredential.user.uid);
       Get.offAll(HomePage());
     } catch (e) {
       Get.snackbar(

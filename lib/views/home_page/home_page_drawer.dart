@@ -19,7 +19,7 @@ class HomePageDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
-    final user = Get.find<AuthController>().user;
+    final user = Get.find<UserController>().user;
 
     return Drawer(
       child: ListView(
@@ -31,7 +31,7 @@ class HomePageDrawer extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  user == null
+                  authController.user == null
                       ? InkWell(
                           onTap: () {
                             Get.to(LoginPage());
@@ -44,8 +44,8 @@ class HomePageDrawer extends StatelessWidget {
                             ],
                           ),
                         )
-                      : Text(user),
-                  user == null
+                      : Text(user.name),
+                  authController.user == null
                       ? InkWell(
                           onTap: () {
                             Get.to(LoginPage());

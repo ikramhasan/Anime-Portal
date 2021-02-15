@@ -1,6 +1,9 @@
+import 'package:anime_portal/controllers/user_controller.dart';
+import 'package:anime_portal/services/database.dart';
 import 'package:anime_portal/views/anime_page/anime_page.dart';
 import 'package:anime_portal/widgets/anime_cached_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class AnimeCard extends StatelessWidget {
   final anime;
@@ -9,7 +12,13 @@ class AnimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final database = Database();
+    final user = Get.find<UserController>().user;
+
     return GestureDetector(
+      onLongPress: () {
+        database.addAnimeToWatchList(user, anime.malId);
+      },
       onTap: () {
         Navigator.push(
             context,

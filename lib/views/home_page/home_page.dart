@@ -1,5 +1,6 @@
 import 'package:anime_portal/controllers/auth_controller.dart';
 import 'package:anime_portal/services/api_service.dart';
+import 'package:anime_portal/services/database.dart';
 import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
 import 'package:anime_portal/views/airing_today_page/airing_today_page.dart';
 import 'package:anime_portal/views/home_page/home_page_drawer.dart';
@@ -17,94 +18,101 @@ class HomePage extends StatelessWidget {
   final JikanApiService _api = JikanApiService();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final authController = Get.find<AuthController>();
+  final database = Database();
 
   @override
   Widget build(BuildContext context) {
     int weekday = DateTime.now().weekday;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Anime Portal'),
-        leading: InkWell(
-          onTap: () {
-            _scaffoldKey.currentState.openDrawer();
-          },
-          splashColor: Colors.blue.withOpacity(0.5),
-          child: Icon(
-            LineIcons.stream,
-            color: Colors.blue,
-          ),
-        ),
-        actions: [
-          InkWell(
-            splashColor: Colors.blue.withOpacity(0.5),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(
-                LineIcons.search,
-                color: Colors.blue,
+    return FutureBuilder(
+        future: authController.getUser,
+        builder: (context, snapshot) {
+          database.getUserFromDatabase(snapshot.data.uid);
+          return Scaffold(
+            key: _scaffoldKey,
+            appBar: AppBar(
+              title: Text('Anime Portal'),
+              leading: InkWell(
+                onTap: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+                splashColor: Colors.blue.withOpacity(0.5),
+                child: Icon(
+                  LineIcons.stream,
+                  color: Colors.blue,
+                ),
+              ),
+              actions: [
+                InkWell(
+                  splashColor: Colors.blue.withOpacity(0.5),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Icon(
+                      LineIcons.search,
+                      color: Colors.blue,
+                    ),
+                  ),
+                  onTap: () {
+                    showSearch(
+                      context: context,
+                      delegate: SearchPage(),
+                    );
+                  },
+                ),
+              ],
+            ),
+            drawer: HomePageDrawer(api: _api),
+            resizeToAvoidBottomInset: false,
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.only(left: 16, top: 16, bottom: 34),
+                child: Column(
+                  children: [
+                    buildTitleWidget(
+                      title: 'Trending Now',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TrendingNowPage(api: _api),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 8),
+                    buildTrendingListViewWidget(_api),
+                    SizedBox(height: 8),
+                    buildTitleWidget(
+                      title: 'Airing Today',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AiringTodayPage(api: _api),
+                          ),
+                        );
+                      },
+                    ),
+                    buildAiringTodayWidget(weekday, _api),
+                    SizedBox(height: 8),
+                    buildTitleWidget(
+                      title: 'Airing This Season',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                AiringThisSeasonPage(api: _api),
+                          ),
+                        );
+                      },
+                    ),
+                    buildAiringThisSeasonWidget(_api),
+                  ],
+                ),
               ),
             ),
-            onTap: () {
-              showSearch(
-                context: context,
-                delegate: SearchPage(),
-              );
-            },
-          ),
-        ],
-      ),
-      drawer: HomePageDrawer(api: _api),
-      resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(left: 16, top: 16, bottom: 34),
-          child: Column(
-            children: [
-              buildTitleWidget(
-                title: 'Trending Now',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TrendingNowPage(api: _api),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: 8),
-              buildTrendingListViewWidget(_api),
-              SizedBox(height: 8),
-              buildTitleWidget(
-                title: 'Airing Today',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AiringTodayPage(api: _api),
-                    ),
-                  );
-                },
-              ),
-              buildAiringTodayWidget(weekday, _api),
-              SizedBox(height: 8),
-              buildTitleWidget(
-                title: 'Airing This Season',
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AiringThisSeasonPage(api: _api),
-                    ),
-                  );
-                },
-              ),
-              buildAiringThisSeasonWidget(_api),
-            ],
-          ),
-        ),
-      ),
-    );
+          );
+        });
   }
 }
