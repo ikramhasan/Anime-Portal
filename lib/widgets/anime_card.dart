@@ -17,7 +17,7 @@ class AnimeCard extends StatelessWidget {
 
     return GestureDetector(
       onLongPress: () {
-        database.addAnimeToWatchList(user, anime.malId);
+        database.deleteAnimeFromDatabase(user, anime.malId);
       },
       onTap: () {
         Navigator.push(

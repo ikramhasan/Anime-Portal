@@ -26,11 +26,48 @@ class Database {
       await _firestore.collection('users').doc(user.uid).update({
         'watchList': FieldValue.arrayUnion([animeId])
       });
-      Get.snackbar('Well Done!', 'Anime successfully added to watchlist');
+      Get.snackbar('Well Done!', 'Anime added successfully');
       return true;
     } catch (e) {
       Get.snackbar('Error writing to database', e);
       return false;
+    }
+  }
+
+  Future<bool> addAnimeToFinishedList(UserModel user, int animeId) async {
+    try {
+      await _firestore.collection('users').doc(user.uid).update({
+        'finishedWatching': FieldValue.arrayUnion([animeId])
+      });
+      Get.snackbar('Well Done!', 'Anime added successfully');
+      return true;
+    } catch (e) {
+      Get.snackbar('Error writing to database', e);
+      return false;
+    }
+  }
+
+  deleteAnimeFromDatabase(UserModel user, int animeId) async {
+    try {
+      await _firestore.collection('users').doc(user.uid).update({
+        'watchList': FieldValue.arrayRemove([animeId])
+      });
+      return true;
+    } catch (e) {
+      Get.snackbar('Error writing to database', e);
+      return false;
+    }
+  }
+
+  Future<UserModel> getWatchListAnimeFromDatabase(String uid) async {
+    try {
+      var doc = await _firestore.collection('users').doc(uid).get();
+      final user = UserModel.fromMap(doc.data());
+      Get.find<UserController>().setUser(user);
+      return user;
+    } catch (e) {
+      print(e);
+      rethrow;
     }
   }
 
