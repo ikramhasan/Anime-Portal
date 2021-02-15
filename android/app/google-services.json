@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "778229088461",
+    "project_id": "anime-portal-hub",
+    "storage_bucket": "anime-portal-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:778229088461:android:da3145e3a7d303e82da984",
+        "android_client_info": {
+          "package_name": "com.ikramhasan.anime_portal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "778229088461-jgftea6j4rd21kp064j7t6do2gg03gb0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ikramhasan.anime_portal",
+            "certificate_hash": "08300fe16c37fb63c9451e1f9ea37244b27a4edc"
+          }
+        },
+        {
+          "client_id": "778229088461-uc2f3prni67qpme7k2jd14j6gtkloh29.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIjavK96ZpGT5Ucqfteg_WbirETBQVcDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "778229088461-uc2f3prni67qpme7k2jd14j6gtkloh29.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -22,6 +22,9 @@ dependencies:
   intl: ^0.16.1
   readmore: ^1.0.0
   webview_flutter: ^1.0.7
+  firebase_auth: ^0.20.0+1
+  cloud_firestore: ^0.16.0
+  firebase_core: ^0.7.0
   syncfusion_flutter_charts: ^18.4.42
 
 dev_dependencies:

@@ -1,8 +1,11 @@
+import 'package:anime_portal/controllers/user_controller.dart';
 import 'package:anime_portal/services/api_service.dart';
 import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
 import 'package:anime_portal/views/airing_today_page/airing_today_page.dart';
+import 'package:anime_portal/views/login_page/login_page.dart';
 import 'package:anime_portal/views/trending_now_page/trending_now_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
 
 class HomePageDrawer extends StatelessWidget {
@@ -11,6 +14,7 @@ class HomePageDrawer extends StatelessWidget {
   const HomePageDrawer({Key key, @required this.api}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final userController = Get.find<UserController>();
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -23,26 +27,7 @@ class HomePageDrawer extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            backgroundColor: Theme.of(context).canvasColor,
-                            actions: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text('Cancel'),
-                              ),
-                            ],
-                            title: Text('Alert !'),
-                            content: Text(
-                              'Login feature not yet implemented. Please wait.',
-                            ),
-                          );
-                        },
-                      );
+                      Get.to(LoginPage());
                     },
                     child: Row(
                       children: [
