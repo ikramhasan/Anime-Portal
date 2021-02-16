@@ -63,9 +63,9 @@ class Database {
   //   }
   // }
 
-  // Stream<DocumentSnapshot> streamAnimeWatchList(UserModel user) {
-  //   return _firestore.collection('users').doc(user.uid).snapshots();
-  // }
+  Stream<DocumentSnapshot> streamAnimeWatchList(UserModel user) {
+    return _firestore.collection('users').doc(user.uid).snapshots();
+  }
 
   Future<bool> addAnimeToFinishedList(UserModel user, int animeId) async {
     try {

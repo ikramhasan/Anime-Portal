@@ -1,7 +1,6 @@
 import 'package:anime_portal/controllers/auth_controller.dart';
 import 'package:anime_portal/controllers/bindings/auth_binding.dart';
 import 'package:anime_portal/views/home_page/home_page.dart';
-import 'package:anime_portal/views/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';

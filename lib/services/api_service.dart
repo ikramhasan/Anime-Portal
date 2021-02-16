@@ -92,7 +92,6 @@ class JikanApiService {
     return info;
   }
 
-
   // TODO: Implement feature
   Future<Season> getSeasonLater() async {}
 

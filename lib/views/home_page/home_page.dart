@@ -6,7 +6,7 @@ import 'package:anime_portal/views/home_page/home_page_drawer.dart';
 import 'package:anime_portal/views/home_page/widgets/build_airing_this_season_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_airing_today_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_finished_watching_widget.dart';
-import 'package:anime_portal/views/home_page/widgets/build_trending_today_widget.dart';
+import 'package:anime_portal/views/home_page/widgets/build_trending_now_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_watchlist_widget.dart';
 import 'package:anime_portal/views/search_page/search_page.dart';
 import 'package:flutter/material.dart';
@@ -18,11 +18,11 @@ class HomePage extends StatelessWidget {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final authController = Get.find<AuthController>();
   final database = Database();
+  final user = Get.find<UserController>().user;
 
   @override
   Widget build(BuildContext context) {
     int weekday = DateTime.now().weekday;
-    final user = Get.find<UserController>().user;
 
     return FutureBuilder(
       future: authController.getUser,

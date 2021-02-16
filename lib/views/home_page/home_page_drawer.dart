@@ -1,13 +1,12 @@
 import 'package:anime_portal/controllers/auth_controller.dart';
 import 'package:anime_portal/controllers/user_controller.dart';
 import 'package:anime_portal/services/api_service.dart';
-import 'package:anime_portal/views/airing_this_season_page/airing_this_season_page.dart';
-import 'package:anime_portal/views/airing_today_page/airing_today_page.dart';
 import 'package:anime_portal/views/login_page/login_page.dart';
-import 'package:anime_portal/views/trending_now_page/trending_now_page.dart';
+import 'package:anime_portal/views/view_all_page/view_all_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:anime_portal/controllers/anime_controller.dart';
 
 class HomePageDrawer extends StatelessWidget {
   final JikanApiService api;
@@ -20,6 +19,7 @@ class HomePageDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final authController = Get.find<AuthController>();
     final user = Get.find<UserController>().user;
+    final animeController = Get.find<AnimeController>();
 
     buildDrawerHeader() {
       return DrawerHeader(
@@ -115,21 +115,26 @@ class HomePageDrawer extends StatelessWidget {
           ListTile(
             title: Text('Trending Now'),
             onTap: () {
-              Get.to(TrendingNowPage(api: api));
+              //Get.to(TrendingNowPage(api: api));
+              Get.to(
+                ViewAllPage(
+                    animeList: animeController.trendingList,
+                    appbarTitle: 'Trending Now'),
+              );
             },
           ),
           Divider(thickness: 1),
           ListTile(
             title: Text('Airing Today'),
             onTap: () {
-              Get.to(AiringTodayPage(api: api));
+              //Get.to(AiringTodayPage(api: api));
             },
           ),
           Divider(thickness: 1),
           ListTile(
             title: Text('Airing This Season'),
             onTap: () {
-              Get.to(AiringThisSeasonPage(api: api));
+              //Get.to(AiringThisSeasonPage(api: api));
             },
           ),
           Divider(thickness: 1),

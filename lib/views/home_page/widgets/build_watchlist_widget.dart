@@ -1,5 +1,6 @@
 import 'package:anime_portal/models/user_model.dart';
 import 'package:anime_portal/services/api_service.dart';
+import 'package:anime_portal/services/database.dart';
 import 'package:anime_portal/widgets/anime_card.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ buildWatchlistWidget({
   @required BuildContext context,
   @required UserModel user,
 }) {
+  final database = Database();
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -29,6 +31,7 @@ buildWatchlistWidget({
           itemCount: user.watchlist.length,
           itemBuilder: (context, index) {
             return FutureBuilder(
+              //stream: database.streamAnimeWatchList(user),
               future: api.getAnimeInfo(user.watchlist[index]),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {

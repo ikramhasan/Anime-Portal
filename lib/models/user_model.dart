@@ -49,8 +49,11 @@ class UserModel {
       uid: map['uid'],
       name: map['name'],
       email: map['email'],
-      watchlist: List<int>.from(map['watchlist']),
-      finishedWatching: List<int>.from(map['finishedWatching']),
+      watchlist:
+          map['watchlist'] == null ? null : List<int>.from(map['watchlist']),
+      finishedWatching: map['finishedWatching'] == null
+          ? null
+          : List<int>.from(map['finishedWatching']),
     );
   }
 
