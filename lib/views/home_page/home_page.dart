@@ -27,7 +27,10 @@ class HomePage extends StatelessWidget {
     return FutureBuilder(
         future: authController.getUser,
         builder: (context, snapshot) {
-          database.getUserFromDatabase(snapshot.data.uid);
+          if (snapshot.connectionState == ConnectionState.done) {
+            database.getUserFromDatabase(snapshot.data.uid);
+          }
+
           return Scaffold(
             key: _scaffoldKey,
             appBar: AppBar(

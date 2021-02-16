@@ -21,6 +21,20 @@ class Database {
     }
   }
 
+  Future<UserModel> getUserFromDatabase(String uid) async {
+    try {
+      DocumentSnapshot doc =
+          await _firestore.collection('users').doc(uid).get();
+      final user = UserModel.fromMap(doc.data());
+      Get.find<UserController>().setUser(user);
+      print('user: $user');
+      return user;
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+
   Future<bool> addAnimeToWatchList(UserModel user, int animeId) async {
     try {
       await _firestore.collection('users').doc(user.uid).update({
@@ -33,6 +47,20 @@ class Database {
       return false;
     }
   }
+
+  // getWatchlistFromDatabase(UserModel user, int animeId) async {
+  //   try {
+  //     final DocumentSnapshot snapshot =
+  //         await _firestore.collection('users').doc(user.uid).get();
+  //     return snapshot.get('watchList');
+  //   } catch (e) {
+  //     Get.snackbar('Error writing to database', e);
+  //   }
+  // }
+
+  // Stream<DocumentSnapshot> streamAnimeWatchList(UserModel user) {
+  //   return _firestore.collection('users').doc(user.uid).snapshots();
+  // }
 
   Future<bool> addAnimeToFinishedList(UserModel user, int animeId) async {
     try {
@@ -59,28 +87,15 @@ class Database {
     }
   }
 
-  Future<UserModel> getWatchListAnimeFromDatabase(String uid) async {
-    try {
-      var doc = await _firestore.collection('users').doc(uid).get();
-      final user = UserModel.fromMap(doc.data());
-      Get.find<UserController>().setUser(user);
-      return user;
-    } catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
-
-  Future<UserModel> getUserFromDatabase(String uid) async {
-    try {
-      DocumentSnapshot doc =
-          await _firestore.collection('users').doc(uid).get();
-      final user = UserModel.fromMap(doc.data());
-      Get.find<UserController>().setUser(user);
-      return user;
-    } catch (e) {
-      print(e);
-      rethrow;
-    }
-  }
+  // Future<UserModel> getWatchListAnimeFromDatabase(String uid) async {
+  //   try {
+  //     var doc = await _firestore.collection('users').doc(uid).get();
+  //     final user = UserModel.fromMap(doc.data());
+  //     Get.find<UserController>().setUser(user);
+  //     return user;
+  //   } catch (e) {
+  //     print(e);
+  //     rethrow;
+  //   }
+  // }
 }

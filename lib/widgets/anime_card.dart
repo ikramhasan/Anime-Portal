@@ -2,6 +2,7 @@ import 'package:anime_portal/controllers/user_controller.dart';
 import 'package:anime_portal/services/database.dart';
 import 'package:anime_portal/views/anime_page/anime_page.dart';
 import 'package:anime_portal/widgets/anime_cached_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,14 +18,15 @@ class AnimeCard extends StatelessWidget {
 
     return GestureDetector(
       onLongPress: () {
-        database.deleteAnimeFromDatabase(user, anime.malId);
+        database.addAnimeToWatchList(user, anime.malId);
       },
       onTap: () {
         Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => AnimePage(malId: anime.malId),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => AnimePage(malId: anime.malId),
+          ),
+        );
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
