@@ -25,9 +25,14 @@ class Database {
     try {
       DocumentSnapshot doc =
           await _firestore.collection('users').doc(uid).get();
+
+      print('user map from firebase : ${doc.data()}');
+
       final user = UserModel.fromMap(doc.data());
       Get.find<UserController>().setUser(user);
-      print('user: $user');
+
+      print('user model: $user');
+
       return user;
     } catch (e) {
       print(e);
@@ -38,7 +43,7 @@ class Database {
   Future<bool> addAnimeToWatchList(UserModel user, int animeId) async {
     try {
       await _firestore.collection('users').doc(user.uid).update({
-        'watchList': FieldValue.arrayUnion([animeId])
+        'watchlist': FieldValue.arrayUnion([animeId])
       });
       Get.snackbar('Well Done!', 'Anime added successfully');
       return true;

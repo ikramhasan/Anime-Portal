@@ -45,8 +45,6 @@ class UserModel {
   factory UserModel.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
 
-    print(map);
-
     return UserModel(
       uid: map['uid'],
       name: map['name'],

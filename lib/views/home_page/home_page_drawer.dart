@@ -21,129 +21,138 @@ class HomePageDrawer extends StatelessWidget {
     final authController = Get.find<AuthController>();
     final user = Get.find<UserController>().user;
 
+    buildDrawerHeader() {
+      return DrawerHeader(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            authController.user == null
+                ? InkWell(
+                    onTap: () {
+                      Get.to(LoginPage());
+                    },
+                    child: Row(
+                      children: [
+                        Icon(LineIcons.userSecret, size: 25),
+                        SizedBox(width: 8),
+                        Text('anonymous'),
+                      ],
+                    ),
+                  )
+                : Text(user.name),
+            authController.user == null
+                ? InkWell(
+                    onTap: () {
+                      Get.to(LoginPage());
+                    },
+                    child: Container(
+                      height: 25,
+                      width: 70,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(width: 5),
+                          Text(
+                            'Login',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                          SizedBox(width: 5),
+                          Icon(
+                            LineIcons.alternateSignIn,
+                            size: 25,
+                            color: Colors.blue,
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : InkWell(
+                    onTap: () {
+                      authController.signout();
+                    },
+                    child: Container(
+                      height: 25,
+                      width: 85,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: Row(
+                        children: [
+                          SizedBox(width: 5),
+                          Text(
+                            'Signout',
+                            style: TextStyle(color: Colors.red),
+                          ),
+                          SizedBox(width: 5),
+                          Icon(
+                            Icons.exit_to_app,
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+          ],
+        ),
+        decoration: BoxDecoration(
+          color: Colors.blue,
+        ),
+      );
+    }
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           Container(
             height: 100,
-            child: DrawerHeader(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  authController.user == null
-                      ? InkWell(
-                          onTap: () {
-                            Get.to(LoginPage());
-                          },
-                          child: Row(
-                            children: [
-                              Icon(LineIcons.userSecret, size: 25),
-                              SizedBox(width: 8),
-                              Text('anonymous'),
-                            ],
-                          ),
-                        )
-                      : Text(user.name),
-                  authController.user == null
-                      ? InkWell(
-                          onTap: () {
-                            Get.to(LoginPage());
-                          },
-                          child: Container(
-                            height: 25,
-                            width: 70,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(width: 5),
-                                Text(
-                                  'Login',
-                                  style: TextStyle(color: Colors.blue),
-                                ),
-                                SizedBox(width: 5),
-                                Icon(
-                                  LineIcons.alternateSignIn,
-                                  size: 25,
-                                  color: Colors.blue,
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      : InkWell(
-                          onTap: () {
-                            authController.signout();
-                          },
-                          child: Container(
-                            height: 25,
-                            width: 85,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(3),
-                            ),
-                            child: Row(
-                              children: [
-                                SizedBox(width: 5),
-                                Text(
-                                  'Signout',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                                SizedBox(width: 5),
-                                Icon(
-                                  Icons.exit_to_app,
-                                  color: Colors.red,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
+            child: buildDrawerHeader(),
           ),
           ListTile(
             title: Text('Trending Now'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => TrendingNowPage(api: api),
-                ),
-              );
+              Get.to(TrendingNowPage(api: api));
             },
           ),
           Divider(thickness: 1),
           ListTile(
             title: Text('Airing Today'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AiringTodayPage(api: api),
-                ),
-              );
+              Get.to(AiringTodayPage(api: api));
             },
           ),
           Divider(thickness: 1),
           ListTile(
             title: Text('Airing This Season'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => AiringThisSeasonPage(api: api),
-                ),
-              );
+              Get.to(AiringThisSeasonPage(api: api));
             },
           ),
           Divider(thickness: 1),
+          user.watchlist != null
+              ? ListTile(
+                  title: Text('My Watchlist'),
+                  onTap: () {
+                    // TODO: Navigate to page
+                    // Get.to(FinishedWatchingPage(api: api));
+                  },
+                )
+              : Container(),
+          user.watchlist != null ? Divider(thickness: 1) : Container(),
+          user.finishedWatching != null
+              ? ListTile(
+                  title: Text('Finished Watching'),
+                  onTap: () {
+                    // TODO: Navigate to page
+                    // Get.to(FinishedWatchingPage(api: api));
+                  },
+                )
+              : Container(),
+          user.finishedWatching != null ? Divider(thickness: 1) : Container(),
         ],
       ),
     );

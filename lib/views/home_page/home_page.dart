@@ -7,6 +7,7 @@ import 'package:anime_portal/views/home_page/widgets/build_airing_this_season_wi
 import 'package:anime_portal/views/home_page/widgets/build_airing_today_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_finished_watching_widget.dart';
 import 'package:anime_portal/views/home_page/widgets/build_trending_today_widget.dart';
+import 'package:anime_portal/views/home_page/widgets/build_watchlist_widget.dart';
 import 'package:anime_portal/views/search_page/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -74,8 +75,8 @@ class HomePage extends StatelessWidget {
               padding: EdgeInsets.only(left: 16, top: 16, bottom: 34),
               child: Column(
                 children: [
-                  user.finishedWatching != null
-                      ? buildFinishedWatchingWidget(
+                  user.watchlist != null
+                      ? buildWatchlistWidget(
                           api: _api,
                           context: context,
                           user: user,
@@ -94,6 +95,13 @@ class HomePage extends StatelessWidget {
                     api: _api,
                     context: context,
                   ),
+                  user.finishedWatching != null
+                      ? buildFinishedWatchingWidget(
+                          api: _api,
+                          context: context,
+                          user: user,
+                        )
+                      : Container(),
                 ],
               ),
             ),

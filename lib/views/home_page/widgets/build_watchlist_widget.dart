@@ -4,7 +4,7 @@ import 'package:anime_portal/widgets/anime_card.dart';
 import 'package:anime_portal/widgets/title_widget.dart';
 import 'package:flutter/material.dart';
 
-buildFinishedWatchingWidget({
+buildWatchlistWidget({
   @required JikanApiService api,
   @required BuildContext context,
   @required UserModel user,
@@ -13,11 +13,11 @@ buildFinishedWatchingWidget({
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       buildTitleWidget(
-        title: 'Finished Watching',
+        title: 'My Watchlist',
         onPressed: () {
-          // TODO: Add nevigating to finshed watching page
+          // TODO: Add nevigating to watchlist page
 
-          // Get.to(FinishedWatchingPage(api: api))
+          // Get.to(WatchlistPage(api: api))
         },
       ),
       SizedBox(height: 8),
@@ -26,10 +26,10 @@ buildFinishedWatchingWidget({
         child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
-          itemCount: user.finishedWatching.length,
+          itemCount: user.watchlist.length,
           itemBuilder: (context, index) {
             return FutureBuilder(
-              future: api.getAnimeInfo(user.finishedWatching[index]),
+              future: api.getAnimeInfo(user.watchlist[index]),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   final anime = snapshot.data;
