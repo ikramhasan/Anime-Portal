@@ -5,6 +5,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ViewAllPage extends StatelessWidget {
+  // FIXME: transform this page so that it can take a list of anime insted of 
+  // the api to make it more maintainable
+ 
   final anime;
   final JikanApiService api;
   final String widgetType;
@@ -15,6 +18,7 @@ class ViewAllPage extends StatelessWidget {
     @required this.api,
     @required this.widgetType,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     buildAnimeGridWidget(snapshot) {
