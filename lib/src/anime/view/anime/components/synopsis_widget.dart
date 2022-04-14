@@ -15,7 +15,7 @@ class SynopsisWidget extends StatelessWidget {
       ),
       child: Text(
         text ?? 'No synopsis available for this anime.',
-        style: const TextStyle(fontSize: 15),
+        style: const TextStyle(fontSize: 12),
       ),
     );
   }

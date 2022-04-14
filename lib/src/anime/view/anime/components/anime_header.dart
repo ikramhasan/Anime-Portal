@@ -22,7 +22,7 @@ class AnimeHeader extends StatelessWidget {
           ),
         ),
         Container(
-          height: 300,
+          height: 302,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             color: Colors.white,
