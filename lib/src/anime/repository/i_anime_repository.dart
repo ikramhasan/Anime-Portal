@@ -1,6 +1,7 @@
 import 'package:anime_portal/src/anime/model/anime.dart';
 import 'package:anime_portal/src/anime/model/character_staff.dart';
 import 'package:anime_portal/src/anime/model/episode.dart';
+import 'package:anime_portal/src/anime/model/generic_info.dart';
 import 'package:anime_portal/src/anime/model/picture.dart';
 import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/app/model/failure.dart';
@@ -23,4 +24,6 @@ abstract class IAnimeRepository {
    Future<Either<Failure, List<Episode>>> getAnimeEpisodes(int id);
 
    Future<Either<Failure, List<Picture>>> getAnimePictures(int id);
+
+   Future<Either<Failure, List<Top>>> getAnimeRecommendations(int id);
 }

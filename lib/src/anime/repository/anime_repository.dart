@@ -1,6 +1,7 @@
 import 'package:anime_portal/src/anime/model/anime.dart';
 import 'package:anime_portal/src/anime/model/character_staff.dart';
 import 'package:anime_portal/src/anime/model/episode.dart';
+import 'package:anime_portal/src/anime/model/generic_info.dart';
 import 'package:anime_portal/src/anime/model/picture.dart';
 import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/anime/repository/converters.dart';
@@ -173,5 +174,23 @@ class AnimeRepository implements IAnimeRepository {
     final pictureList = result.map((p0) => convertPictureToDomain(p0)).toList();
 
     return right(pictureList);
+  }
+
+  @override
+  Future<Either<Failure, List<Top>>> getAnimeRecommendations(
+      int id) async {
+    try {
+      final result = await _api.getAnimeRecommendations(id);
+
+      final recommendationsList = result
+          .map(
+            (e) => convertRecommendationToDomain(e),
+          )
+          .toList();
+
+      return right(recommendationsList);
+    } catch (e) {
+      return left(const Failure(message: 'Could not fetch anime information'));
+    }
   }
 }

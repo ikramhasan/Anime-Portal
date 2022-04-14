@@ -184,3 +184,12 @@ Picture convertPictureToDomain(jikan.Picture picture) {
     small: picture.small,
   );
 }
+
+Top convertRecommendationToDomain(jikan.Recommendation recommendation) {
+  return Top(
+    title: recommendation.title,
+    id: recommendation.malId,
+    url: recommendation.url,
+    imageUrl: recommendation.imageUrl,
+  );
+}

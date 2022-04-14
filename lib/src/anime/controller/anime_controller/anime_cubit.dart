@@ -2,9 +2,11 @@ import 'package:anime_portal/src/anime/model/anime.dart';
 import 'package:anime_portal/src/anime/model/character_staff.dart';
 import 'package:anime_portal/src/anime/model/episode.dart';
 import 'package:anime_portal/src/anime/model/picture.dart';
+import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/anime/repository/i_anime_repository.dart';
 import 'package:anime_portal/src/app/model/failure.dart';
 import 'package:bloc/bloc.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'anime_state.dart';
@@ -94,6 +96,27 @@ class AnimeCubit extends Cubit<AnimeState> {
           picturesLoading: false,
           picturesFailure: Failure.none(),
           pictures: pictures,
+        ),
+      ),
+    );
+  }
+
+  Future<void> getRecommendationsByID(int id) async {
+    emit(state.copyWith(recommendationsLoading: true));
+
+    final failureOrPictures = await _repository.getAnimeRecommendations(id);
+
+    emit(
+      failureOrPictures.fold(
+        (failure) => state.copyWith(
+          recommendationsLoading: false,
+          recommendationsFailure: failure,
+          recommendations: [],
+        ),
+        (recommendations) => state.copyWith(
+          recommendationsLoading: false,
+          recommendationsFailure: Failure.none(),
+          recommendations: recommendations,
         ),
       ),
     );

@@ -30,7 +30,10 @@ class _$AnimeStateTearOff {
       required Failure episodeFailure,
       required bool picturesLoading,
       required List<Picture> pictures,
-      required Failure picturesFailure}) {
+      required Failure picturesFailure,
+      required bool recommendationsLoading,
+      required List<Top> recommendations,
+      required Failure recommendationsFailure}) {
     return _AnimeState(
       loading: loading,
       anime: anime,
@@ -44,6 +47,9 @@ class _$AnimeStateTearOff {
       picturesLoading: picturesLoading,
       pictures: pictures,
       picturesFailure: picturesFailure,
+      recommendationsLoading: recommendationsLoading,
+      recommendations: recommendations,
+      recommendationsFailure: recommendationsFailure,
     );
   }
 }
@@ -66,7 +72,11 @@ mixin _$AnimeState {
   Failure get episodeFailure => throw _privateConstructorUsedError; // Pictures
   bool get picturesLoading => throw _privateConstructorUsedError;
   List<Picture> get pictures => throw _privateConstructorUsedError;
-  Failure get picturesFailure => throw _privateConstructorUsedError;
+  Failure get picturesFailure =>
+      throw _privateConstructorUsedError; // Recommendations
+  bool get recommendationsLoading => throw _privateConstructorUsedError;
+  List<Top> get recommendations => throw _privateConstructorUsedError;
+  Failure get recommendationsFailure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnimeStateCopyWith<AnimeState> get copyWith =>
@@ -90,7 +100,10 @@ abstract class $AnimeStateCopyWith<$Res> {
       Failure episodeFailure,
       bool picturesLoading,
       List<Picture> pictures,
-      Failure picturesFailure});
+      Failure picturesFailure,
+      bool recommendationsLoading,
+      List<Top> recommendations,
+      Failure recommendationsFailure});
 
   $AnimeCopyWith<$Res> get anime;
   $FailureCopyWith<$Res> get failure;
@@ -98,6 +111,7 @@ abstract class $AnimeStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get characterStaffFailure;
   $FailureCopyWith<$Res> get episodeFailure;
   $FailureCopyWith<$Res> get picturesFailure;
+  $FailureCopyWith<$Res> get recommendationsFailure;
 }
 
 /// @nodoc
@@ -122,6 +136,9 @@ class _$AnimeStateCopyWithImpl<$Res> implements $AnimeStateCopyWith<$Res> {
     Object? picturesLoading = freezed,
     Object? pictures = freezed,
     Object? picturesFailure = freezed,
+    Object? recommendationsLoading = freezed,
+    Object? recommendations = freezed,
+    Object? recommendationsFailure = freezed,
   }) {
     return _then(_value.copyWith(
       loading: loading == freezed
@@ -172,6 +189,18 @@ class _$AnimeStateCopyWithImpl<$Res> implements $AnimeStateCopyWith<$Res> {
           ? _value.picturesFailure
           : picturesFailure // ignore: cast_nullable_to_non_nullable
               as Failure,
+      recommendationsLoading: recommendationsLoading == freezed
+          ? _value.recommendationsLoading
+          : recommendationsLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      recommendations: recommendations == freezed
+          ? _value.recommendations
+          : recommendations // ignore: cast_nullable_to_non_nullable
+              as List<Top>,
+      recommendationsFailure: recommendationsFailure == freezed
+          ? _value.recommendationsFailure
+          : recommendationsFailure // ignore: cast_nullable_to_non_nullable
+              as Failure,
     ));
   }
 
@@ -216,6 +245,13 @@ class _$AnimeStateCopyWithImpl<$Res> implements $AnimeStateCopyWith<$Res> {
       return _then(_value.copyWith(picturesFailure: value));
     });
   }
+
+  @override
+  $FailureCopyWith<$Res> get recommendationsFailure {
+    return $FailureCopyWith<$Res>(_value.recommendationsFailure, (value) {
+      return _then(_value.copyWith(recommendationsFailure: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -236,7 +272,10 @@ abstract class _$AnimeStateCopyWith<$Res> implements $AnimeStateCopyWith<$Res> {
       Failure episodeFailure,
       bool picturesLoading,
       List<Picture> pictures,
-      Failure picturesFailure});
+      Failure picturesFailure,
+      bool recommendationsLoading,
+      List<Top> recommendations,
+      Failure recommendationsFailure});
 
   @override
   $AnimeCopyWith<$Res> get anime;
@@ -250,6 +289,8 @@ abstract class _$AnimeStateCopyWith<$Res> implements $AnimeStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get episodeFailure;
   @override
   $FailureCopyWith<$Res> get picturesFailure;
+  @override
+  $FailureCopyWith<$Res> get recommendationsFailure;
 }
 
 /// @nodoc
@@ -276,6 +317,9 @@ class __$AnimeStateCopyWithImpl<$Res> extends _$AnimeStateCopyWithImpl<$Res>
     Object? picturesLoading = freezed,
     Object? pictures = freezed,
     Object? picturesFailure = freezed,
+    Object? recommendationsLoading = freezed,
+    Object? recommendations = freezed,
+    Object? recommendationsFailure = freezed,
   }) {
     return _then(_AnimeState(
       loading: loading == freezed
@@ -326,6 +370,18 @@ class __$AnimeStateCopyWithImpl<$Res> extends _$AnimeStateCopyWithImpl<$Res>
           ? _value.picturesFailure
           : picturesFailure // ignore: cast_nullable_to_non_nullable
               as Failure,
+      recommendationsLoading: recommendationsLoading == freezed
+          ? _value.recommendationsLoading
+          : recommendationsLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      recommendations: recommendations == freezed
+          ? _value.recommendations
+          : recommendations // ignore: cast_nullable_to_non_nullable
+              as List<Top>,
+      recommendationsFailure: recommendationsFailure == freezed
+          ? _value.recommendationsFailure
+          : recommendationsFailure // ignore: cast_nullable_to_non_nullable
+              as Failure,
     ));
   }
 }
@@ -345,7 +401,10 @@ class _$_AnimeState implements _AnimeState {
       required this.episodeFailure,
       required this.picturesLoading,
       required this.pictures,
-      required this.picturesFailure});
+      required this.picturesFailure,
+      required this.recommendationsLoading,
+      required this.recommendations,
+      required this.recommendationsFailure});
 
   @override // Anime
   final bool loading;
@@ -371,10 +430,16 @@ class _$_AnimeState implements _AnimeState {
   final List<Picture> pictures;
   @override
   final Failure picturesFailure;
+  @override // Recommendations
+  final bool recommendationsLoading;
+  @override
+  final List<Top> recommendations;
+  @override
+  final Failure recommendationsFailure;
 
   @override
   String toString() {
-    return 'AnimeState(loading: $loading, anime: $anime, failure: $failure, characterStaffLoading: $characterStaffLoading, characterStaff: $characterStaff, characterStaffFailure: $characterStaffFailure, episodeLoading: $episodeLoading, episodes: $episodes, episodeFailure: $episodeFailure, picturesLoading: $picturesLoading, pictures: $pictures, picturesFailure: $picturesFailure)';
+    return 'AnimeState(loading: $loading, anime: $anime, failure: $failure, characterStaffLoading: $characterStaffLoading, characterStaff: $characterStaff, characterStaffFailure: $characterStaffFailure, episodeLoading: $episodeLoading, episodes: $episodes, episodeFailure: $episodeFailure, picturesLoading: $picturesLoading, pictures: $pictures, picturesFailure: $picturesFailure, recommendationsLoading: $recommendationsLoading, recommendations: $recommendations, recommendationsFailure: $recommendationsFailure)';
   }
 
   @override
@@ -400,7 +465,13 @@ class _$_AnimeState implements _AnimeState {
                 .equals(other.picturesLoading, picturesLoading) &&
             const DeepCollectionEquality().equals(other.pictures, pictures) &&
             const DeepCollectionEquality()
-                .equals(other.picturesFailure, picturesFailure));
+                .equals(other.picturesFailure, picturesFailure) &&
+            const DeepCollectionEquality()
+                .equals(other.recommendationsLoading, recommendationsLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.recommendations, recommendations) &&
+            const DeepCollectionEquality()
+                .equals(other.recommendationsFailure, recommendationsFailure));
   }
 
   @override
@@ -417,7 +488,10 @@ class _$_AnimeState implements _AnimeState {
       const DeepCollectionEquality().hash(episodeFailure),
       const DeepCollectionEquality().hash(picturesLoading),
       const DeepCollectionEquality().hash(pictures),
-      const DeepCollectionEquality().hash(picturesFailure));
+      const DeepCollectionEquality().hash(picturesFailure),
+      const DeepCollectionEquality().hash(recommendationsLoading),
+      const DeepCollectionEquality().hash(recommendations),
+      const DeepCollectionEquality().hash(recommendationsFailure));
 
   @JsonKey(ignore: true)
   @override
@@ -438,7 +512,10 @@ abstract class _AnimeState implements AnimeState {
       required Failure episodeFailure,
       required bool picturesLoading,
       required List<Picture> pictures,
-      required Failure picturesFailure}) = _$_AnimeState;
+      required Failure picturesFailure,
+      required bool recommendationsLoading,
+      required List<Top> recommendations,
+      required Failure recommendationsFailure}) = _$_AnimeState;
 
   @override // Anime
   bool get loading;
@@ -464,6 +541,12 @@ abstract class _AnimeState implements AnimeState {
   List<Picture> get pictures;
   @override
   Failure get picturesFailure;
+  @override // Recommendations
+  bool get recommendationsLoading;
+  @override
+  List<Top> get recommendations;
+  @override
+  Failure get recommendationsFailure;
   @override
   @JsonKey(ignore: true)
   _$AnimeStateCopyWith<_AnimeState> get copyWith =>

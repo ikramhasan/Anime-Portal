@@ -13,15 +13,20 @@ class AnimeState with _$AnimeState {
     required CharacterStaff characterStaff,
     required Failure characterStaffFailure,
 
-    // Episodes 
+    // Episodes
     required bool episodeLoading,
     required List<Episode> episodes,
     required Failure episodeFailure,
 
-    // Pictures 
+    // Pictures
     required bool picturesLoading,
     required List<Picture> pictures,
     required Failure picturesFailure,
+
+    // Recommendations
+    required bool recommendationsLoading,
+    required List<Top> recommendations,
+    required Failure recommendationsFailure,
   }) = _AnimeState;
 
   factory AnimeState.initial() => AnimeState(
@@ -36,6 +41,9 @@ class AnimeState with _$AnimeState {
         episodes: [],
         picturesLoading: false,
         picturesFailure: Failure.none(),
-         pictures: [],
+        pictures: [],
+        recommendations: [],
+        recommendationsFailure: Failure.none(),
+        recommendationsLoading: false,
       );
 }
