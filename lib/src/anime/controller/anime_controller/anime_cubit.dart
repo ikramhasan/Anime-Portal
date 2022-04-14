@@ -6,7 +6,6 @@ import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/anime/repository/i_anime_repository.dart';
 import 'package:anime_portal/src/app/model/failure.dart';
 import 'package:bloc/bloc.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'anime_state.dart';

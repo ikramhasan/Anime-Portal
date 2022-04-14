@@ -1,4 +1,5 @@
 import 'package:anime_portal/src/anime/controller/top_anime_controller/top_anime_cubit.dart';
+import 'package:anime_portal/src/anime/controller/watchlist_controller/watchlist_cubit.dart';
 import 'package:anime_portal/src/anime/view/components/anime_horizontal_list_widget.dart';
 import 'package:anime_portal/src/anime/view/see_all/see_all_page.dart';
 import 'package:anime_portal/src/app/view/components/loading_widget.dart';
@@ -21,11 +22,14 @@ class TopMangaList extends StatelessWidget {
           return AnimeHorizontalListWidget(
             title: 'Top Manga',
             seeAllPressed: () {
-                Navigator.of(context).push(
+              Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => SeeAllPage(
-                    title: 'Trending Manga',
-                    animeList: state.trendingMangaList,
+                  builder: (context) => BlocProvider<WatchlistCubit>(
+                    create: (context) => WatchlistCubit(),
+                    child: SeeAllPage(
+                      title: 'Trending Manga',
+                      animeList: state.trendingMangaList,
+                    ),
                   ),
                 ),
               );

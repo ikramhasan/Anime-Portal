@@ -14,28 +14,31 @@ class TopAnimeCubit extends Cubit<TopAnimeState> {
   final IAnimeRepository _repository;
 
   Future<void> getTrendingAnime() async {
-    emit(state.copyWith(trendingAnimeLoading: true));
+    if (state.trendingAnimeList.isEmpty) {
+      emit(state.copyWith(trendingAnimeLoading: true));
 
-    final failureOrTrendingAnime = await _repository.getTrendingAnime();
+      final failureOrTrendingAnime = await _repository.getTrendingAnime();
 
-    emit(
-      failureOrTrendingAnime.fold(
-        (failure) => state.copyWith(
-          trendingAnimeLoading: false,
-          trendingAnimeFailure: failure,
-          trendingAnimeList: IList(),
+      emit(
+        failureOrTrendingAnime.fold(
+          (failure) => state.copyWith(
+            trendingAnimeLoading: false,
+            trendingAnimeFailure: failure,
+            trendingAnimeList: IList(),
+          ),
+          (topAnime) => state.copyWith(
+            trendingAnimeLoading: false,
+            trendingAnimeFailure: Failure.none(),
+            trendingAnimeList: topAnime,
+          ),
         ),
-        (topAnime) => state.copyWith(
-          trendingAnimeLoading: false,
-          trendingAnimeFailure: Failure.none(),
-          trendingAnimeList: topAnime,
-        ),
-      ),
-    );
+      );
+    } 
   }
 
   Future<void> getTopAnime() async {
-    emit(state.copyWith(topAnimeLoading: true));
+    if(state.topAnimeList.isEmpty) {
+emit(state.copyWith(topAnimeLoading: true));
 
     final failureOrTopAnime = await _repository.getTopAnime();
 
@@ -53,10 +56,13 @@ class TopAnimeCubit extends Cubit<TopAnimeState> {
         ),
       ),
     );
+    } 
+    
   }
 
   Future<void> getTrendingManga() async {
-    emit(state.copyWith(trendingMangaLoading: true));
+    if(state.trendingMangaList.isEmpty) {
+ emit(state.copyWith(trendingMangaLoading: true));
 
     final failureOrTopManga = await _repository.getTrendingManga();
 
@@ -74,5 +80,7 @@ class TopAnimeCubit extends Cubit<TopAnimeState> {
         ),
       ),
     );
+    }
+   
   }
 }

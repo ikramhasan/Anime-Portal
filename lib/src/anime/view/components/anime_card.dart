@@ -1,4 +1,6 @@
 import 'package:anime_portal/src/anime/controller/anime_controller/anime_cubit.dart';
+import 'package:anime_portal/src/anime/controller/watchlist_controller/watchlist_cubit.dart';
+import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/anime/repository/anime_repository.dart';
 import 'package:anime_portal/src/anime/view/anime/anime_page.dart';
 import 'package:anime_portal/src/anime/view/components/anime_rating_bar.dart';
@@ -23,11 +25,19 @@ class AnimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    late Offset _tapPosition;
+    final RenderObject? overlay =
+        Overlay.of(context)?.context.findRenderObject();
+
+    final animeWatchlistCubit = context.read<WatchlistCubit>();
+
+    final topPresentAtList = animeWatchlistCubit.state.watchlist
+        .where((element) => element.id == id);
+
     return SizedBox(
       width: 125,
       child: GestureDetector(
         onTap: () {
-          
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => BlocProvider<AnimeCubit>(
@@ -35,6 +45,44 @@ class AnimeCard extends StatelessWidget {
                 child: AnimePage(id: id),
               ),
             ),
+          );
+        },
+        onTapDown: (TapDownDetails details) {
+          _tapPosition = details.globalPosition;
+        },
+        onLongPress: () {
+          showMenu(
+            context: context,
+            position: RelativeRect.fromRect(
+              // smaller rect, the touch area
+              _tapPosition & const Size(40, 40),
+              // Bigger rect, the entire screen
+              Offset.zero & overlay!.semanticBounds.size,
+            ),
+            items: [
+              PopupMenuItem(
+                height: 16,
+                onTap: () {
+                  if (topPresentAtList.isEmpty) {
+                    animeWatchlistCubit.addToWatchList(
+                      Top(
+                        id: id,
+                        title: title,
+                        url: '',
+                        imageUrl: imageUrl,
+                      ),
+                    );
+                  } else {
+                    animeWatchlistCubit.removeFromList(id);
+                  }
+                },
+                child: Text(
+                  topPresentAtList.isEmpty
+                      ? 'Add to watchlist'
+                      : 'Remove from list',
+                ),
+              ),
+            ],
           );
         },
         child: Column(

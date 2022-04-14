@@ -1,6 +1,7 @@
 import 'package:anime_portal/src/anime/controller/airing_today_controller/airing_today_cubit.dart';
 import 'package:anime_portal/src/anime/controller/anime_controller/anime_cubit.dart';
 import 'package:anime_portal/src/anime/controller/top_anime_controller/top_anime_cubit.dart';
+import 'package:anime_portal/src/anime/controller/watchlist_controller/watchlist_cubit.dart';
 import 'package:anime_portal/src/anime/repository/anime_repository.dart';
 import 'package:anime_portal/src/anime/view/home_page.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +36,9 @@ class App extends StatelessWidget {
           ),
           BlocProvider<AnimeCubit>(
             create: ((context) => AnimeCubit(AnimeRepository.instance)),
+          ),
+          BlocProvider<WatchlistCubit>(
+            create: ((context) => WatchlistCubit()),
           ),
         ],
         child: const HomePage(),

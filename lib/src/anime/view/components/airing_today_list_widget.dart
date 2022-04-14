@@ -1,4 +1,5 @@
 import 'package:anime_portal/src/anime/controller/airing_today_controller/airing_today_cubit.dart';
+import 'package:anime_portal/src/anime/controller/watchlist_controller/watchlist_cubit.dart';
 import 'package:anime_portal/src/anime/view/components/anime_horizontal_list_widget.dart';
 import 'package:anime_portal/src/anime/view/see_all/see_all_page.dart';
 import 'package:anime_portal/src/app/view/components/loading_widget.dart';
@@ -21,11 +22,14 @@ class AiringTodayList extends StatelessWidget {
           return AnimeHorizontalListWidget(
             title: 'Airing Today',
             seeAllPressed: () {
-                Navigator.of(context).push(
+              Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => SeeAllPage(
-                    title: 'Airing Today',
-                    animeList: state.airingToday,
+                  builder: (context) => BlocProvider<WatchlistCubit>(
+                    create: (context) => WatchlistCubit(),
+                    child: SeeAllPage(
+                      title: 'Airing Today',
+                      animeList: state.airingToday,
+                    ),
                   ),
                 ),
               );

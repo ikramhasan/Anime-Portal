@@ -14,23 +14,25 @@ class AiringTodayCubit extends Cubit<AiringTodayState> {
   final IAnimeRepository _repository;
 
   Future<void> getAiringToday(int weekday) async {
-    emit(state.copyWith(loading: true));
+    if (state.airingToday.isEmpty) {
+      emit(state.copyWith(loading: true));
 
-    final failureOrAiringAnime = await _repository.getAiringToday(weekday);
+      final failureOrAiringAnime = await _repository.getAiringToday(weekday);
 
-    emit(
-      failureOrAiringAnime.fold(
-        (failure) => state.copyWith(
-          loading: false,
-          failure: failure,
-          airingToday: IList(),
+      emit(
+        failureOrAiringAnime.fold(
+          (failure) => state.copyWith(
+            loading: false,
+            failure: failure,
+            airingToday: IList(),
+          ),
+          (airingTodayList) => state.copyWith(
+            loading: false,
+            failure: Failure.none(),
+            airingToday: airingTodayList,
+          ),
         ),
-        (airingTodayList) => state.copyWith(
-          loading: false,
-          failure: Failure.none(),
-          airingToday: airingTodayList,
-        ),
-      ),
-    );
+      );
+    }
   }
 }
