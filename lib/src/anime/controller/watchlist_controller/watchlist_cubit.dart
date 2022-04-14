@@ -11,12 +11,14 @@ class WatchlistCubit extends HydratedCubit<WatchlistState> {
   WatchlistCubit() : super(WatchlistState.initial());
 
   Future<void> addToWatchList(Top top) async {
+    emit(state.copyWith(loading: true));
     final watchlist = state.watchlist;
     watchlist.add(top);
     emit(state.copyWith(watchlist: watchlist, loading: false));
   }
 
   Future<void> removeFromList(int id) async {
+    emit(state.copyWith(loading: true));
     final watchlist = state.watchlist;
     watchlist.removeWhere((top) => top.id == id);
     emit(state.copyWith(watchlist: watchlist, loading: false));

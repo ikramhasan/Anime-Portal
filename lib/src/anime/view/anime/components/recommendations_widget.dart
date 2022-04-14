@@ -15,7 +15,12 @@ class RecommendationsWidget extends StatelessWidget {
         if (state.recommendationsLoading) {
           return const LoadingWidget();
         } else if (state.recommendations.isNotEmpty) {
-          return TopAnimeGridListWidget(animeList: state.recommendations.lock);
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: TopAnimeGridListWidget(
+              animeList: state.recommendations.lock,
+            ),
+          );
         } else {
           return const SizedBox.shrink();
         }

@@ -17,7 +17,6 @@ class HomePage extends StatelessWidget {
     context.read<TopAnimeCubit>().getTopAnime();
     context.read<TopAnimeCubit>().getTrendingManga();
     context.read<AiringTodayCubit>().getAiringToday(DateTime.now().weekday);
-    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

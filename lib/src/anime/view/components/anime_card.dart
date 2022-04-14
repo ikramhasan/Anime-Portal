@@ -42,7 +42,11 @@ class AnimeCard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => BlocProvider<AnimeCubit>(
                 create: ((context) => AnimeCubit(AnimeRepository.instance)),
-                child: AnimePage(id: id),
+                child: AnimePage(
+                  id: id,
+                  isAnimeInWatchlist: topPresentAtList.isNotEmpty,
+                  watchlistCubit: animeWatchlistCubit,
+                ),
               ),
             ),
           );
