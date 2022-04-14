@@ -6,6 +6,9 @@ import 'package:anime_portal/src/anime/model/episode.dart';
 import 'package:anime_portal/src/anime/model/generic_info.dart';
 import 'package:anime_portal/src/anime/model/picture.dart';
 import 'package:anime_portal/src/anime/model/related.dart';
+import 'package:anime_portal/src/anime/model/review.dart';
+import 'package:anime_portal/src/anime/model/review_score.dart';
+import 'package:anime_portal/src/anime/model/reviewer.dart';
 import 'package:anime_portal/src/anime/model/staff.dart';
 import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
@@ -191,5 +194,29 @@ Top convertRecommendationToDomain(jikan.Recommendation recommendation) {
     id: recommendation.malId,
     url: recommendation.url,
     imageUrl: recommendation.imageUrl,
+  );
+}
+
+Review convertReviewToDomain(jikan.Review review) {
+  return Review(
+    id: review.malId,
+    url: review.url,
+    content: review.content,
+    date: review.date,
+    helpfulCount: review.helpfulCount,
+    reviewer: Reviewer(
+      imageUrl: review.reviewer.imageUrl,
+      url: review.reviewer.url,
+      username: review.reviewer.username,
+      reviewScore: ReviewScore(
+        character: review.reviewer.scores.character,
+        enjoyment: review.reviewer.scores.enjoyment,
+        overall: review.reviewer.scores.overall,
+        story: review.reviewer.scores.story,
+        animation: review.reviewer.scores.animation,
+        art: review.reviewer.scores.art,
+        sound: review.reviewer.scores.sound,
+      ),
+    ),
   );
 }

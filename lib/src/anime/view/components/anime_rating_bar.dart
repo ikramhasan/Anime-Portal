@@ -1,3 +1,4 @@
+import 'package:anime_portal/src/app/helpers/normalizer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -15,7 +16,7 @@ class AnimeRatingBar extends StatelessWidget {
         ? RatingBar(
             itemCount: 5,
             allowHalfRating: true,
-            initialRating: rating! - 5,
+            initialRating: normalizeToFive(val: rating!, max: 10, min: 5),
             ignoreGestures: true,
             glow: true,
             itemSize: 15,

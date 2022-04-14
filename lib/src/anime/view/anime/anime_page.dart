@@ -6,6 +6,7 @@ import 'package:anime_portal/src/anime/view/anime/components/characters_widget.d
 import 'package:anime_portal/src/anime/view/anime/components/episodes_widget.dart';
 import 'package:anime_portal/src/anime/view/anime/components/photos_widget.dart';
 import 'package:anime_portal/src/anime/view/anime/components/recommendations_widget.dart';
+import 'package:anime_portal/src/anime/view/anime/components/reviews_list_widget.dart';
 import 'package:anime_portal/src/anime/view/anime/components/synopsis_widget.dart';
 import 'package:anime_portal/src/app/view/components/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,7 @@ class AnimePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tabController = useTabController(initialLength: 5);
-    
+    final tabController = useTabController(initialLength: 6);
 
     useEffect(() {
       context.read<AnimeCubit>().getAnimeByID(id);
@@ -35,6 +35,7 @@ class AnimePage extends HookWidget {
       context.read<AnimeCubit>().getEpisodesByID(id);
       context.read<AnimeCubit>().getPicturesByID(id);
       context.read<AnimeCubit>().getRecommendationsByID(id);
+      context.read<AnimeCubit>().getReviewsByID(id);
 
       return null;
     }, []);
@@ -80,6 +81,10 @@ class AnimePage extends HookWidget {
                           child: Center(child: Text('Photos')),
                           height: 32,
                         ),
+                        SizedBox(
+                          child: Center(child: Text('Reviews')),
+                          height: 32,
+                        ),
                       ],
                     ),
                   ),
@@ -96,6 +101,7 @@ class AnimePage extends HookWidget {
                         const CharactersWidget(),
                         const EpisodesWidget(),
                         const PhotosWidget(),
+                        const ReviewsListWidget(),
                       ],
                     ),
                   ),

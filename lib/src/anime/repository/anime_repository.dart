@@ -1,8 +1,8 @@
 import 'package:anime_portal/src/anime/model/anime.dart';
 import 'package:anime_portal/src/anime/model/character_staff.dart';
 import 'package:anime_portal/src/anime/model/episode.dart';
-import 'package:anime_portal/src/anime/model/generic_info.dart';
 import 'package:anime_portal/src/anime/model/picture.dart';
+import 'package:anime_portal/src/anime/model/review.dart';
 import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/anime/repository/converters.dart';
 import 'package:anime_portal/src/anime/repository/i_anime_repository.dart';
@@ -178,7 +178,8 @@ class AnimeRepository implements IAnimeRepository {
 
   @override
   Future<Either<Failure, List<Top>>> getAnimeRecommendations(
-      int id) async {
+    int id,
+  ) async {
     try {
       final result = await _api.getAnimeRecommendations(id);
 
@@ -189,6 +190,23 @@ class AnimeRepository implements IAnimeRepository {
           .toList();
 
       return right(recommendationsList);
+    } catch (e) {
+      return left(const Failure(message: 'Could not fetch anime information'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<Review>>> getAnimeReviews(int id) async {
+    try {
+      final result = await _api.getAnimeReviews(id);
+
+      final reviewsList = result
+          .map(
+            (e) => convertReviewToDomain(e),
+          )
+          .toList();
+
+      return right(reviewsList);
     } catch (e) {
       return left(const Failure(message: 'Could not fetch anime information'));
     }

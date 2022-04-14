@@ -2,6 +2,7 @@ import 'package:anime_portal/src/anime/model/anime.dart';
 import 'package:anime_portal/src/anime/model/character_staff.dart';
 import 'package:anime_portal/src/anime/model/episode.dart';
 import 'package:anime_portal/src/anime/model/picture.dart';
+import 'package:anime_portal/src/anime/model/review.dart';
 import 'package:anime_portal/src/anime/model/top.dart';
 import 'package:anime_portal/src/anime/repository/i_anime_repository.dart';
 import 'package:anime_portal/src/app/model/failure.dart';
@@ -116,6 +117,27 @@ class AnimeCubit extends Cubit<AnimeState> {
           recommendationsLoading: false,
           recommendationsFailure: Failure.none(),
           recommendations: recommendations,
+        ),
+      ),
+    );
+  }
+
+  Future<void> getReviewsByID(int id) async {
+    emit(state.copyWith(reviewsLoading: true));
+
+    final failureOrPictures = await _repository.getAnimeReviews(id);
+
+    emit(
+      failureOrPictures.fold(
+        (failure) => state.copyWith(
+          reviewsLoading: false,
+          reviewsFailure: failure,
+          reviews: [],
+        ),
+        (reviews) => state.copyWith(
+          reviewsLoading: false,
+          reviewsFailure: Failure.none(),
+          reviews: reviews,
         ),
       ),
     );
