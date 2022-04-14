@@ -11,34 +11,34 @@ class AnimeWatchlistWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<WatchlistCubit, WatchlistState>(
-      builder: (context, state) {
-        if (state.watchlist.isEmpty) {
-          return const SizedBox.shrink();
-        } else {
-          return Column(
-            children: [
-              AnimeHorizontalListWidget(
-                title: 'Watchlist',
-                seeAllPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => BlocProvider<WatchlistCubit>(
-                        create: (context) => WatchlistCubit(),
-                        child: SeeAllPage(
-                          title: 'Your Watchlist',
-                          animeList: state.watchlist.lock,
-                        ),
-                      ),
+        builder: (context, state) {
+      // if (state.watchlist.isEmpty) {
+      //   return const SizedBox.shrink();
+      // } else {
+      return Column(
+        children: [
+          AnimeHorizontalListWidget(
+            title: 'Watchlist',
+            seeAllPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => BlocProvider<WatchlistCubit>(
+                    create: (context) => WatchlistCubit(),
+                    child: SeeAllPage(
+                      title: 'Your Watchlist',
+                      animeList: state.watchlist.lock,
                     ),
-                  );
-                },
-                animeList: state.watchlist.lock,
-              ),
-              const SizedBox(height: 16),
-            ],
-          );
-        }
-      },
-    );
+                  ),
+                ),
+              );
+            },
+            animeList: state.watchlist.lock,
+          ),
+          const SizedBox(height: 16),
+        ],
+      );
+    }
+        // },
+        );
   }
 }

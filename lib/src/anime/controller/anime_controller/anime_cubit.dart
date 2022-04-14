@@ -142,4 +142,26 @@ class AnimeCubit extends Cubit<AnimeState> {
       ),
     );
   }
+
+  Future<void> searchAnime(String query) async {
+    print(query);
+    // emit(state.copyWith(searchLoading: true));
+
+    // final failureOrPictures = await _repository.searchAnime(query);
+
+    // emit(
+    //   failureOrPictures.fold(
+    //     (failure) => state.copyWith(
+    //       searchLoading: false,
+    //       searchFailure: failure,
+    //       searchResult: [],
+    //     ),
+    //     (search) => state.copyWith(
+    //       searchLoading: false,
+    //       searchFailure: Failure.none(),
+    //       searchResult: search,
+    //     ),
+    //   ),
+    // );
+  }
 }

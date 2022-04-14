@@ -28,4 +28,6 @@ abstract class IAnimeRepository {
   Future<Either<Failure, List<Top>>> getAnimeRecommendations(int id);
 
   Future<Either<Failure, List<Review>>> getAnimeReviews(int id);
+
+  Future<Either<Failure, List<Top>>> searchAnime(String query);
 }

@@ -36,7 +36,10 @@ class _$AnimeStateTearOff {
       required Failure recommendationsFailure,
       required bool reviewsLoading,
       required List<Review> reviews,
-      required Failure reviewsFailure}) {
+      required Failure reviewsFailure,
+      required bool searchLoading,
+      required List<Top> searchResult,
+      required Failure searchFailure}) {
     return _AnimeState(
       loading: loading,
       anime: anime,
@@ -56,6 +59,9 @@ class _$AnimeStateTearOff {
       reviewsLoading: reviewsLoading,
       reviews: reviews,
       reviewsFailure: reviewsFailure,
+      searchLoading: searchLoading,
+      searchResult: searchResult,
+      searchFailure: searchFailure,
     );
   }
 }
@@ -86,7 +92,10 @@ mixin _$AnimeState {
       throw _privateConstructorUsedError; // Recommendations
   bool get reviewsLoading => throw _privateConstructorUsedError;
   List<Review> get reviews => throw _privateConstructorUsedError;
-  Failure get reviewsFailure => throw _privateConstructorUsedError;
+  Failure get reviewsFailure => throw _privateConstructorUsedError; // Search
+  bool get searchLoading => throw _privateConstructorUsedError;
+  List<Top> get searchResult => throw _privateConstructorUsedError;
+  Failure get searchFailure => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnimeStateCopyWith<AnimeState> get copyWith =>
@@ -116,7 +125,10 @@ abstract class $AnimeStateCopyWith<$Res> {
       Failure recommendationsFailure,
       bool reviewsLoading,
       List<Review> reviews,
-      Failure reviewsFailure});
+      Failure reviewsFailure,
+      bool searchLoading,
+      List<Top> searchResult,
+      Failure searchFailure});
 
   $AnimeCopyWith<$Res> get anime;
   $FailureCopyWith<$Res> get failure;
@@ -126,6 +138,7 @@ abstract class $AnimeStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get picturesFailure;
   $FailureCopyWith<$Res> get recommendationsFailure;
   $FailureCopyWith<$Res> get reviewsFailure;
+  $FailureCopyWith<$Res> get searchFailure;
 }
 
 /// @nodoc
@@ -156,6 +169,9 @@ class _$AnimeStateCopyWithImpl<$Res> implements $AnimeStateCopyWith<$Res> {
     Object? reviewsLoading = freezed,
     Object? reviews = freezed,
     Object? reviewsFailure = freezed,
+    Object? searchLoading = freezed,
+    Object? searchResult = freezed,
+    Object? searchFailure = freezed,
   }) {
     return _then(_value.copyWith(
       loading: loading == freezed
@@ -230,6 +246,18 @@ class _$AnimeStateCopyWithImpl<$Res> implements $AnimeStateCopyWith<$Res> {
           ? _value.reviewsFailure
           : reviewsFailure // ignore: cast_nullable_to_non_nullable
               as Failure,
+      searchLoading: searchLoading == freezed
+          ? _value.searchLoading
+          : searchLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchResult: searchResult == freezed
+          ? _value.searchResult
+          : searchResult // ignore: cast_nullable_to_non_nullable
+              as List<Top>,
+      searchFailure: searchFailure == freezed
+          ? _value.searchFailure
+          : searchFailure // ignore: cast_nullable_to_non_nullable
+              as Failure,
     ));
   }
 
@@ -288,6 +316,13 @@ class _$AnimeStateCopyWithImpl<$Res> implements $AnimeStateCopyWith<$Res> {
       return _then(_value.copyWith(reviewsFailure: value));
     });
   }
+
+  @override
+  $FailureCopyWith<$Res> get searchFailure {
+    return $FailureCopyWith<$Res>(_value.searchFailure, (value) {
+      return _then(_value.copyWith(searchFailure: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -314,7 +349,10 @@ abstract class _$AnimeStateCopyWith<$Res> implements $AnimeStateCopyWith<$Res> {
       Failure recommendationsFailure,
       bool reviewsLoading,
       List<Review> reviews,
-      Failure reviewsFailure});
+      Failure reviewsFailure,
+      bool searchLoading,
+      List<Top> searchResult,
+      Failure searchFailure});
 
   @override
   $AnimeCopyWith<$Res> get anime;
@@ -332,6 +370,8 @@ abstract class _$AnimeStateCopyWith<$Res> implements $AnimeStateCopyWith<$Res> {
   $FailureCopyWith<$Res> get recommendationsFailure;
   @override
   $FailureCopyWith<$Res> get reviewsFailure;
+  @override
+  $FailureCopyWith<$Res> get searchFailure;
 }
 
 /// @nodoc
@@ -364,6 +404,9 @@ class __$AnimeStateCopyWithImpl<$Res> extends _$AnimeStateCopyWithImpl<$Res>
     Object? reviewsLoading = freezed,
     Object? reviews = freezed,
     Object? reviewsFailure = freezed,
+    Object? searchLoading = freezed,
+    Object? searchResult = freezed,
+    Object? searchFailure = freezed,
   }) {
     return _then(_AnimeState(
       loading: loading == freezed
@@ -438,6 +481,18 @@ class __$AnimeStateCopyWithImpl<$Res> extends _$AnimeStateCopyWithImpl<$Res>
           ? _value.reviewsFailure
           : reviewsFailure // ignore: cast_nullable_to_non_nullable
               as Failure,
+      searchLoading: searchLoading == freezed
+          ? _value.searchLoading
+          : searchLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      searchResult: searchResult == freezed
+          ? _value.searchResult
+          : searchResult // ignore: cast_nullable_to_non_nullable
+              as List<Top>,
+      searchFailure: searchFailure == freezed
+          ? _value.searchFailure
+          : searchFailure // ignore: cast_nullable_to_non_nullable
+              as Failure,
     ));
   }
 }
@@ -463,7 +518,10 @@ class _$_AnimeState implements _AnimeState {
       required this.recommendationsFailure,
       required this.reviewsLoading,
       required this.reviews,
-      required this.reviewsFailure});
+      required this.reviewsFailure,
+      required this.searchLoading,
+      required this.searchResult,
+      required this.searchFailure});
 
   @override // Anime
   final bool loading;
@@ -501,10 +559,16 @@ class _$_AnimeState implements _AnimeState {
   final List<Review> reviews;
   @override
   final Failure reviewsFailure;
+  @override // Search
+  final bool searchLoading;
+  @override
+  final List<Top> searchResult;
+  @override
+  final Failure searchFailure;
 
   @override
   String toString() {
-    return 'AnimeState(loading: $loading, anime: $anime, failure: $failure, characterStaffLoading: $characterStaffLoading, characterStaff: $characterStaff, characterStaffFailure: $characterStaffFailure, episodeLoading: $episodeLoading, episodes: $episodes, episodeFailure: $episodeFailure, picturesLoading: $picturesLoading, pictures: $pictures, picturesFailure: $picturesFailure, recommendationsLoading: $recommendationsLoading, recommendations: $recommendations, recommendationsFailure: $recommendationsFailure, reviewsLoading: $reviewsLoading, reviews: $reviews, reviewsFailure: $reviewsFailure)';
+    return 'AnimeState(loading: $loading, anime: $anime, failure: $failure, characterStaffLoading: $characterStaffLoading, characterStaff: $characterStaff, characterStaffFailure: $characterStaffFailure, episodeLoading: $episodeLoading, episodes: $episodes, episodeFailure: $episodeFailure, picturesLoading: $picturesLoading, pictures: $pictures, picturesFailure: $picturesFailure, recommendationsLoading: $recommendationsLoading, recommendations: $recommendations, recommendationsFailure: $recommendationsFailure, reviewsLoading: $reviewsLoading, reviews: $reviews, reviewsFailure: $reviewsFailure, searchLoading: $searchLoading, searchResult: $searchResult, searchFailure: $searchFailure)';
   }
 
   @override
@@ -541,30 +605,40 @@ class _$_AnimeState implements _AnimeState {
                 .equals(other.reviewsLoading, reviewsLoading) &&
             const DeepCollectionEquality().equals(other.reviews, reviews) &&
             const DeepCollectionEquality()
-                .equals(other.reviewsFailure, reviewsFailure));
+                .equals(other.reviewsFailure, reviewsFailure) &&
+            const DeepCollectionEquality()
+                .equals(other.searchLoading, searchLoading) &&
+            const DeepCollectionEquality()
+                .equals(other.searchResult, searchResult) &&
+            const DeepCollectionEquality()
+                .equals(other.searchFailure, searchFailure));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(loading),
-      const DeepCollectionEquality().hash(anime),
-      const DeepCollectionEquality().hash(failure),
-      const DeepCollectionEquality().hash(characterStaffLoading),
-      const DeepCollectionEquality().hash(characterStaff),
-      const DeepCollectionEquality().hash(characterStaffFailure),
-      const DeepCollectionEquality().hash(episodeLoading),
-      const DeepCollectionEquality().hash(episodes),
-      const DeepCollectionEquality().hash(episodeFailure),
-      const DeepCollectionEquality().hash(picturesLoading),
-      const DeepCollectionEquality().hash(pictures),
-      const DeepCollectionEquality().hash(picturesFailure),
-      const DeepCollectionEquality().hash(recommendationsLoading),
-      const DeepCollectionEquality().hash(recommendations),
-      const DeepCollectionEquality().hash(recommendationsFailure),
-      const DeepCollectionEquality().hash(reviewsLoading),
-      const DeepCollectionEquality().hash(reviews),
-      const DeepCollectionEquality().hash(reviewsFailure));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(loading),
+        const DeepCollectionEquality().hash(anime),
+        const DeepCollectionEquality().hash(failure),
+        const DeepCollectionEquality().hash(characterStaffLoading),
+        const DeepCollectionEquality().hash(characterStaff),
+        const DeepCollectionEquality().hash(characterStaffFailure),
+        const DeepCollectionEquality().hash(episodeLoading),
+        const DeepCollectionEquality().hash(episodes),
+        const DeepCollectionEquality().hash(episodeFailure),
+        const DeepCollectionEquality().hash(picturesLoading),
+        const DeepCollectionEquality().hash(pictures),
+        const DeepCollectionEquality().hash(picturesFailure),
+        const DeepCollectionEquality().hash(recommendationsLoading),
+        const DeepCollectionEquality().hash(recommendations),
+        const DeepCollectionEquality().hash(recommendationsFailure),
+        const DeepCollectionEquality().hash(reviewsLoading),
+        const DeepCollectionEquality().hash(reviews),
+        const DeepCollectionEquality().hash(reviewsFailure),
+        const DeepCollectionEquality().hash(searchLoading),
+        const DeepCollectionEquality().hash(searchResult),
+        const DeepCollectionEquality().hash(searchFailure)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -591,7 +665,10 @@ abstract class _AnimeState implements AnimeState {
       required Failure recommendationsFailure,
       required bool reviewsLoading,
       required List<Review> reviews,
-      required Failure reviewsFailure}) = _$_AnimeState;
+      required Failure reviewsFailure,
+      required bool searchLoading,
+      required List<Top> searchResult,
+      required Failure searchFailure}) = _$_AnimeState;
 
   @override // Anime
   bool get loading;
@@ -629,6 +706,12 @@ abstract class _AnimeState implements AnimeState {
   List<Review> get reviews;
   @override
   Failure get reviewsFailure;
+  @override // Search
+  bool get searchLoading;
+  @override
+  List<Top> get searchResult;
+  @override
+  Failure get searchFailure;
   @override
   @JsonKey(ignore: true)
   _$AnimeStateCopyWith<_AnimeState> get copyWith =>

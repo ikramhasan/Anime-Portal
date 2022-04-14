@@ -211,4 +211,21 @@ class AnimeRepository implements IAnimeRepository {
       return left(const Failure(message: 'Could not fetch anime information'));
     }
   }
+
+  @override
+  Future<Either<Failure, List<Top>>> searchAnime(String query)async {
+    try {
+      final result = await _api.search(query, jikan.SearchType.anime);
+
+      final searchList = result
+          .map(
+            (e) => convertSearchToDomain(e),
+          )
+          .toList();
+
+      return right(searchList);
+    } catch (e) {
+      return left(const Failure(message: 'Could not fetch anime information'));
+    }
+  }
 }

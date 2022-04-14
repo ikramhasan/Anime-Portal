@@ -6,6 +6,7 @@ import 'package:anime_portal/src/anime/repository/anime_repository.dart';
 import 'package:anime_portal/src/anime/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Anime Portal',
       theme: ThemeData(
         brightness: Brightness.dark,
         canvasColor: const Color(0xFF171721),
@@ -24,6 +25,7 @@ class App extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
         ),
+        fontFamily: GoogleFonts.comfortaa().fontFamily,
         primarySwatch: Colors.blue,
       ),
       home: MultiBlocProvider(

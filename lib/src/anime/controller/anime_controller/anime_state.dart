@@ -32,6 +32,11 @@ class AnimeState with _$AnimeState {
     required bool reviewsLoading,
     required List<Review> reviews,
     required Failure reviewsFailure,
+
+    // Search
+    required bool searchLoading,
+    required List<Top> searchResult,
+    required Failure searchFailure,
   }) = _AnimeState;
 
   factory AnimeState.initial() => AnimeState(
@@ -53,5 +58,8 @@ class AnimeState with _$AnimeState {
         reviews: [],
         reviewsFailure: Failure.none(),
         reviewsLoading: false,
+        searchResult: [],
+        searchFailure: Failure.none(),
+        searchLoading: false,
       );
 }

@@ -71,27 +71,31 @@ class AnimeHorizontalListWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         SizedBox(
-          height: 223,
-          child: ListView.builder(
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
-            physics: const BouncingScrollPhysics(),
-            itemCount: animeList.length,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(
-                  left: index == 0 ? 16 : 8,
-                  right: index == animeList.length - 1 ? 16 : 0,
+          height: animeList.isEmpty ? 32 : 223,
+          child: animeList.isEmpty
+              ? const Text(
+                  'Press and hold an anime to add it to your watchlist!',
+                )
+              : ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: animeList.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        left: index == 0 ? 16 : 8,
+                        right: index == animeList.length - 1 ? 16 : 0,
+                      ),
+                      child: AnimeCard(
+                        id: animeList[index].id,
+                        title: animeList[index].title,
+                        imageUrl: animeList[index].imageUrl,
+                        score: animeList[index].score,
+                      ),
+                    );
+                  },
                 ),
-                child: AnimeCard(
-                  id: animeList[index].id,
-                  title: animeList[index].title,
-                  imageUrl: animeList[index].imageUrl,
-                  score: animeList[index].score,
-                ),
-              );
-            },
-          ),
         )
       ],
     );

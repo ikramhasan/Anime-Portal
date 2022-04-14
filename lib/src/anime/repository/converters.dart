@@ -197,6 +197,15 @@ Top convertRecommendationToDomain(jikan.Recommendation recommendation) {
   );
 }
 
+Top convertSearchToDomain(jikan.Search search) {
+  return Top(
+    title: search.title ?? '',
+    id: search.malId,
+    url: search.url,
+    imageUrl: search.imageUrl,
+  );
+}
+
 Review convertReviewToDomain(jikan.Review review) {
   return Review(
     id: review.malId,
