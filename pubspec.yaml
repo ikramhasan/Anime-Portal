@@ -63,6 +63,7 @@ dev_dependencies:
   freezed: ^1.1.1
   build_runner: ^2.1.8
   json_serializable: ^6.1.5
+  mockito: ^5.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
