@@ -1,1 +1,0 @@
-class GenericTestException implements Exception {}
