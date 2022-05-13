@@ -1,4 +1,4 @@
-package com.example.anime_portal
+package com.ikramhasan.anime_portal
 
 import io.flutter.embedding.android.FlutterActivity
 
