@@ -21,8 +21,7 @@ class EpisodesWidget extends StatelessWidget {
               final episode = state.episodes[index];
 
               return ListTile(
-                onTap: () {
-                },
+                onTap: () {},
                 title: Text(episode.title),
                 subtitle: Text(
                   convertDateToHumanReadableText(episode.aired) ?? '',
@@ -31,7 +30,7 @@ class EpisodesWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     color:
-                        episode.filler ? Colors.redAccent : Colors.greenAccent,
+                        episode.filler ? Colors.redAccent : Colors.blueAccent,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(4),

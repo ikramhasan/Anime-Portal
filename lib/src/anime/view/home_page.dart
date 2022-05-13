@@ -8,6 +8,8 @@ import 'package:anime_portal/src/anime/view/components/anime_watchlist_widget.da
 import 'package:anime_portal/src/anime/view/components/top_anime_list_widget.dart';
 import 'package:anime_portal/src/anime/view/components/trending_anime_list_widget.dart';
 import 'package:anime_portal/src/anime/view/search/search_page.dart';
+import 'package:anime_portal/src/app/helpers/launch_mail.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -23,6 +25,70 @@ class HomePage extends StatelessWidget {
     context.read<AiringTodayCubit>().getAiringToday(DateTime.now().weekday);
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      drawer: Drawer(
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Anime Portal',
+                      style: GoogleFonts.cinzel(
+                        fontSize: 22,
+                      ),
+                    ),
+                    const Text(
+                      'by Ikram Hasan',
+                      style: TextStyle(fontSize: 12),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(
+                CupertinoIcons.mail,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              title: const Text(
+                'Report a bug!',
+              ),
+              onTap: () {
+                sendMail('General');
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: Icon(
+                CupertinoIcons.person_alt_circle,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              title: const Text(
+                'About me',
+              ),
+              onTap: () {
+                launchURL('https://www.ikramhasan.com/');
+              },
+            ),
+            const Divider(),
+            ListTile(
+              onTap: () {
+                launchURL(
+                  'https://play.google.com/store/search?q=pub%3AIkram%20Hasan&c=apps',
+                );
+              },
+              leading: Icon(
+                CupertinoIcons.square_stack_3d_down_right,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
+              title: const Text('More Apps'),
+            ),
+            const Divider(),
+          ],
+        ),
+      ),
       appBar: AppBar(
         title: Text(
           'Anime Portal',

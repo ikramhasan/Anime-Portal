@@ -38,7 +38,7 @@ class PhotoViewPage extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
-            color: Theme.of(context).colorScheme.secondary,
+            color: Colors.blueAccent,
           ),
           child: Padding(
             padding: const EdgeInsets.all(8),

@@ -2,8 +2,20 @@
     package="com.example.anime_portal">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <queries>
+  <!-- If your app opens https URLs -->
+  <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <data android:scheme="https" />
+  </intent>
+  <!-- If your app sends emails -->
+  <intent>
+    <action android:name="android.intent.action.SEND" />
+    <data android:mimeType="*/*" />
+  </intent>
+</queries>
    <application
-        android:label="anime_portal"
+        android:label="Anime Portal"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
