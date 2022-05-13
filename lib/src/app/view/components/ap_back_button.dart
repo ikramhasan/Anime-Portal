@@ -18,11 +18,11 @@ class APBackButton extends StatelessWidget {
             color: Theme.of(context).canvasColor,
             shape: BoxShape.circle,
           ),
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.arrow_circle_left_outlined,
               size: 32,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Colors.blueAccent,
             ),
           ),
         ),

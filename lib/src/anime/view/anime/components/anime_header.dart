@@ -119,7 +119,7 @@ class AnimeHeader extends HookWidget {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Colors.blueAccent,
                   borderRadius: BorderRadius.circular(6),
                 ),
                 child: Padding(
@@ -128,8 +128,8 @@ class AnimeHeader extends HookWidget {
                     inWatchlist.value
                         ? 'Remove from watchlist'
                         : 'Add to watchlist',
-                    style: TextStyle(
-                      color: Theme.of(context).canvasColor,
+                    style: const TextStyle(
+                      color: Colors.white,
                     ),
                   ),
                 ),

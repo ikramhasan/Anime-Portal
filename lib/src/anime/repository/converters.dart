@@ -203,6 +203,7 @@ Top convertSearchToDomain(jikan.Search search) {
     id: search.malId,
     url: search.url,
     imageUrl: search.imageUrl,
+    score: search.score,
   );
 }
 
